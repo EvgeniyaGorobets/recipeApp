@@ -1,19 +1,30 @@
-import React, { useContext } from 'react';
-import { View, Text, Button } from "react-native";
+import React, { useContext, useState } from 'react';
+import { View, Text, Button, TextInput } from "react-native";
 import { RecipesContext } from '../App';
+import { IngredientList } from './ingredients';
 
-const RecipeYield = ({ recipeYield }) => {
-  return (
-    <Text>{recipeYield.amount} {recipeYield.units}</Text>
-  )
-}
+const RecipeYield = ({ recipeYield, setYield }) => {
+  // copied from EditIngredient, find a way to reuse pls :)
+  const [numericError, setNumError] = useState(false);
 
-const Ingredient = ({ ingredient }) => {
+  const updateAmount = (newAmount) => {
+    setNumError(false);
+    setYield({ ...recipeYield, amount: newAmount });
+
+    if (isNaN(+newAmount)) {
+      setNumError(true);
+    }
+  }
+
   return (
     <View>
-      <Text>{ingredient.name}</Text>
-      <Text>{ingredient.amount}</Text>
-      <Text>{ingredient.units}</Text>
+      <TextInput
+        onChangeText={number => updateAmount(number)}
+        defaultValue={recipeYield.amount}
+        keyboardType="numeric"
+      />
+      <Text>{recipeYield.units}</Text>
+      {numericError && <Text>Recipe yield must be a number.</Text>}
     </View>
   )
 }
@@ -21,14 +32,16 @@ const Ingredient = ({ ingredient }) => {
 const ViewRecipe = ({ navigation, route }) => {
   const { recipes, updateRecipes } = useContext(RecipesContext);
   const recipe = recipes[route.params.recipe]
+  const [recipeYield, setYield] = useState(recipe.yield);
 
   return (
     <View>
       <Text>{recipe.name}</Text>
-      <RecipeYield recipeYield={recipe.yield} />
-      {recipe.ingredients.map(ingredient => {
-        return (<Ingredient ingredient={ingredient} key={ingredient.name} />);
-      })}
+      <RecipeYield recipeYield={recipeYield} setYield={setYield} />
+      <IngredientList 
+        ingredients={recipe.ingredients} 
+        baseYield={recipe.yield.amount} 
+        newYield={recipeYield.amount} />
       <Button
         onPress={() => {
           navigation.navigate('EditRecipe', { recipe: route.params.recipe })

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button, TextInput } from "react-native";
+import { View, Button, TextInput, Text } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import { addIngredient } from '../lib/dataStructures';
+import { computeIngrAmounts, formatIngrAmounts } from '../lib/computeIngredients';
 
 const unitOptions = [
   { value: 'cups' },
@@ -66,5 +67,28 @@ export const AddIngredient = ({ ingredients, setIngredients }) => {
       }}
       title="+"
     />
+  )
+}
+
+const Ingredient = ({ name, amount }) => {
+  return (
+    <View>
+      <Text>{name}</Text>
+      <Text>{amount}</Text>
+    </View>
+  )
+}
+
+export const IngredientList = ({ ingredients, baseYield, newYield }) => {
+  const ingrList = computeIngrAmounts(ingredients, baseYield, newYield);
+  const formattedIngr = formatIngrAmounts(ingrList);
+
+  return(
+    <View>
+      {Object.keys(formattedIngr).map(ingrName => {
+        const amount = formattedIngr[ingrName];
+        return (<Ingredient name={ingrName} amount={amount} key={ingrName} />);
+      })}
+    </View>
   )
 }
