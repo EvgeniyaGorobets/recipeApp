@@ -1,26 +1,45 @@
 import React, { useState, useContext } from 'react';
-import { View, Button, TextInput } from "react-native";
+import { View, Button, TextInput, Text } from "react-native";
 import { RecipesContext } from '../App';
 import { EditIngredient, AddIngredient } from './ingredients';
 import { newRecipe, addRecipe } from '../businessLogic/dataStructures';
 
-const EditYield = ({ recipeYield }) => {
-  const initialAmount = recipeYield.amount ? recipeYield.amount : "servings";
-  const [amount, setAmount] = useState(initialAmount);
-  const [units, setUnits] = useState(recipeYield.units);
+const EditYield = ({ recipeYield, setYield }) => {
+  const [numericError, setNumError] = useState(false);
+  const [emptyUnitError, setUnitError] = useState(false);
+
+  const updateAmount = (newAmount) => {
+    setNumError(false);
+    setYield({ ...recipeYield, amount: newAmount});
+
+    if (isNaN(+newAmount)) {
+      setNumError(true);
+    }
+  } 
+
+  const updateUnits = (newUnits) => {
+    setUnitError(false);
+    setYield({ ...recipeYield, units: newUnits});
+    
+    if (newUnits.length == 0) {
+      setUnitError(true);
+    }
+  }
 
   return (
     <View>
       <TextInput
         placeholder="Amount"
-        onChangeText={number => setAmount(number)}
-        defaultValue={amount}
+        onChangeText={number => updateAmount(number)}
+        defaultValue={recipeYield.amount}
         keyboardType="numeric"
       />
       <TextInput
-        onChangeText={text => setUnits(text)}
-        defaultValue={units}
+        onChangeText={text => updateUnits(text)}
+        defaultValue={recipeYield.units}
       />
+      {numericError && <Text>Yield amount must be a number.</Text>}
+      {emptyUnitError && <Text>Yield units cannot be empty.</Text>}
     </View>
   )
 }
@@ -41,7 +60,7 @@ const EditRecipe = ({ navigation, route }) => {
         onChangeText={text => setName(text)}
         defaultValue={recipeName}
       />
-      <EditYield recipeYield={recipe.yield} />
+      <EditYield recipeYield={recipeYield} setYield={setYield} />
       {ingredients.map((ingredient, index) => {
 
         // Create a callback specific for updating this ingredient in the ingredients const

@@ -7,6 +7,15 @@ import ViewRecipe from './ui/ViewRecipe';
 import EditRecipe from './ui/EditRecipe';
 import { getRecipes, saveRecipes } from './businessLogic/storage';
 
+// Next Steps:
+// 1) Styling (do in car, load resources in advance)
+// 2) Input checks (no empty recipe names, amounts are only numbers, max 3 places after decimal precision)
+// 3) Recipe yield controls/functionality
+// 4) Deleting ingredients and recipes
+// 5) User feedback when stuff fails
+// 6) Notify use when you're close to the memory limit
+// 7) Backups/exports
+
 const Stack = createNativeStackNavigator();
 export const RecipesContext = React.createContext({
   recipes: {},
