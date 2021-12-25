@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button, TextInput } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
-import { addIngredient } from '../businessLogic/dataStructures';
+import { addIngredient } from '../lib/dataStructures';
 
 const unitOptions = [
   { value: 'cups' },

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Button, TextInput, Text } from "react-native";
 import { RecipesContext } from '../App';
 import { EditIngredient, AddIngredient } from './ingredients';
-import { newRecipe, addRecipe } from '../businessLogic/dataStructures';
+import { newRecipe, addRecipe } from '../lib/dataStructures';
 
 const EditYield = ({ recipeYield, setYield }) => {
   const [numericError, setNumError] = useState(false);

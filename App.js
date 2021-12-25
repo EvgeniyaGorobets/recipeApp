@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './ui/Home';
 import ViewRecipe from './ui/ViewRecipe';
 import EditRecipe from './ui/EditRecipe';
-import { getRecipes, saveRecipes } from './businessLogic/storage';
+import { getRecipes, saveRecipes } from './lib/localStorage';
 
 // Next Steps:
 // 1) Styling (do in car, load resources in advance)
