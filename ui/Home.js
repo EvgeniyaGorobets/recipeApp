@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Button } from "react-native";
 import { RecipesContext } from '../App';
 
@@ -46,8 +46,21 @@ const RecipeCard = (props) => {
   );
 }
 
+// consider replacing buttons with TouchableHighlight if you want to use a real icon
+const AddRecipe = ({ navigation }) => {
+  return (
+    <Button 
+      onPress={() => {
+        navigation.navigate('EditRecipe', { recipe: "" })
+      }}
+      title="+"
+    />
+  )
+}
+
+
 const Home = ({ navigation }) => {
-  const recipes = useContext(RecipesContext)
+  const {recipes, updateRecipes} = useContext(RecipesContext)
 
   return (
     <View>
@@ -56,6 +69,7 @@ const Home = ({ navigation }) => {
           return (<RecipeCard recipeName={recipe} key={recipe} navigation={navigation} />);
         }) : null //<Text>Loading Recipes... (but what if there are no recipes?)</Text>
       }
+      <AddRecipe navigation={navigation} />
     </View>
   );
 }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Button, TextInput } from "react-native";
-import { Dropdown } from 'react-native-element-dropdown';
 import { RecipesContext } from '../App';
-
+import { EditIngredient, AddIngredient } from './ingredients';
+import { newRecipe, addRecipe } from '../businessLogic/dataStructures';
 
 const EditYield = ({ recipeYield }) => {
   const initialAmount = recipeYield.amount ? recipeYield.amount : "servings";
@@ -25,57 +25,14 @@ const EditYield = ({ recipeYield }) => {
   )
 }
 
-const unitOptions = [
-  { label: 'cups' },
-  { label: 'tbsp' },
-  { label: 'tsp' },
-  { label: 'mL' },
-  { label: 'L' },
-  { label: 'grams' },
-  { label: 'kg' }
-]
-
-const UnitSelect = ({ units, setUnits }) => {
-  return (
-    <Dropdown
-      data={unitOptions}
-      labelField="label"
-      valueField="label"
-      value={units}
-      onChange={item => {
-        setUnits(item.value);
-      }}
-    />
-  )
-}
-
-const EditIngredient = ({ ingredient }) => {
-  const [name, setName] = useState(ingredient.name);
-  const [amount, setAmount] = useState(ingredient.amount);
-  const [units, setUnits] = useState(ingredient.units);
-
-  return (
-    <View>
-      <TextInput
-        placeholder="Ingredient Name"
-        onChangeText={text => setName(text)}
-        defaultValue={name}
-      />
-      <TextInput
-        placeholder="Amount"
-        onChangeText={number => setAmount(number)}
-        defaultValue={amount}
-        keyboardType="numeric"
-      />
-      <UnitSelect units={units} setUnits={setUnits} />
-    </View>
-  )
-}
-
 const EditRecipe = ({ navigation, route }) => {
-  const recipes = useContext(RecipesContext);
-  const recipe = recipes[route.params.recipe]
+  const {recipes, updateRecipes} = useContext(RecipesContext);
+  const recipe = route.params.recipe ? recipes[route.params.recipe] : newRecipe();
+  const initialName = recipe.name;
+
   const [recipeName, setName] = useState(recipe.name);
+  const [recipeYield, setYield] = useState(recipe.yield);
+  const [ingredients, setIngr] = useState(recipe.ingredients);
 
   return (
     <View>
@@ -85,12 +42,24 @@ const EditRecipe = ({ navigation, route }) => {
         defaultValue={recipeName}
       />
       <EditYield recipeYield={recipe.yield} />
-      {recipe.ingredients.map(ingredient => {
-        return (<EditIngredient ingredient={ingredient} key={ingredient.name} />)
+      {ingredients.map((ingredient, index) => {
+
+        // Create a callback specific for updating this ingredient in the ingredients const
+        const updateIngr = (newIngr) => {
+          const newIngredients = [ ...ingredients ];
+          // idk a cleaner way to do this; it doesnt count as mutating a data structure if i'm creating a new one first
+          newIngredients[index] = newIngr;
+          setIngr(newIngredients);
+        }
+
+        return (<EditIngredient ingredient={ingredient} updateIngredient={updateIngr} key={index} />)
       })}
+      <AddIngredient ingredients={ingredients} setIngredients={setIngr} />
       <Button
         onPress={() => {
-          navigation.navigate('ViewRecipe', { recipe: route.params.recipe })
+          const newRecipes = addRecipe(recipes, initialName, recipeName, recipeYield, ingredients);
+          updateRecipes(newRecipes);
+          navigation.navigate('ViewRecipe', { recipe: recipeName });
         }}
         title="Save Recipe"
       />

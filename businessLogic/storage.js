@@ -6,10 +6,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const getRecipes = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('@recipes');
-    const recipes = jsonValue ? JSON.parse(jsonValue) : null;
+    const recipes = jsonValue ? JSON.parse(jsonValue) : {};
     return(recipes);
   } catch(e) {
     // error reading value
+    console.log(e)
   }
 }
 
@@ -19,6 +20,7 @@ const saveRecipes = async (recipes) => {
     await AsyncStorage.setItem('@recipes', jsonValue)
   } catch (e) {
     // saving error
+    console.log(e)
   }
 }
 

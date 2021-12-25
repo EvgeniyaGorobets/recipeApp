@@ -5,19 +5,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './ui/Home';
 import ViewRecipe from './ui/ViewRecipe';
 import EditRecipe from './ui/EditRecipe';
-import { getRecipes } from './businessLogic/storage';
+import { getRecipes, saveRecipes } from './businessLogic/storage';
 
 const Stack = createNativeStackNavigator();
-export const RecipesContext = React.createContext(null);
+export const RecipesContext = React.createContext({
+  recipes: {},
+  updateRecipes: () => {}
+});
 
 export default function App() {
-  const [recipes, setRecipes] = useState(null);
+  const [recipes, setRecipes] = useState({});
+  const updateRecipes = (newRecipes) => {
+    setRecipes(newRecipes); // updates the context
+    saveRecipes(newRecipes); // saves to local storage
+  } 
 
   useEffect(() => {
     const fetchRecipes = async () => {
       const storedRecipes = await getRecipes();
       setRecipes(storedRecipes);
-      console.log(recipes)
     }
     fetchRecipes()
   }, [])
@@ -26,7 +32,7 @@ export default function App() {
   // wrapping navigator in context provider is the recommended way to pass props
   // https://reactnavigation.org/docs/hello-react-navigation/#passing-additional-props
   return (
-    <RecipesContext.Provider value={recipes}>
+    <RecipesContext.Provider value={{recipes, updateRecipes}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
