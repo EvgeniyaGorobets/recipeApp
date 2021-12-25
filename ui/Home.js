@@ -1,29 +1,30 @@
 import React from 'react';
 import { View, Button } from "react-native";
+import { RecipesContext } from '../App';
 
 const testRecipes = {
   "Chocolate Chip Cookies": {
     name: "Chocolate Chip Cookies",
     yield: {
-        amount: "24",
-        units: "cookies"
+      amount: "24",
+      units: "cookies"
     },
     ingredients: [
-        {
-            name: "flour",
-            amount: "2",
-            units: "cups"
-        },
-        {
-            name: "sugar",
-            amount: "1",
-            units: "cups"
-        },
-        {
-            name: "vanilla extract",
-            amount: "1",
-            units: "tsp"
-        }
+      {
+        name: "flour",
+        amount: "2",
+        units: "cups"
+      },
+      {
+        name: "sugar",
+        amount: "1",
+        units: "cups"
+      },
+      {
+        name: "vanilla extract",
+        amount: "1",
+        units: "tsp"
+      }
     ]
   },
   "Apple Pie": {
@@ -37,8 +38,8 @@ const testRecipes = {
 const RecipeCard = (props) => {
   return (
     <Button
-      onPress={() => { 
-        props.navigation.navigate('ViewRecipe', {recipe: props.recipeName}) 
+      onPress={() => {
+        props.navigation.navigate('ViewRecipe', { recipe: props.recipeName })
       }}
       title={props.recipeName}
     />
@@ -46,13 +47,17 @@ const RecipeCard = (props) => {
 }
 
 const Home = ({ navigation }) => {
-    return (
-      <View>
-        {Object.keys(testRecipes).map(recipe => {
-            return (<RecipeCard recipeName={recipe} key={recipe} navigation={navigation} />);
-        })}
-      </View>
-    );
-  }
-  
+  const recipes = useContext(RecipesContext)
+
+  return (
+    <View>
+      {recipes ?
+        Object.keys(recipes).map(recipe => {
+          return (<RecipeCard recipeName={recipe} key={recipe} navigation={navigation} />);
+        }) : null //<Text>Loading Recipes... (but what if there are no recipes?)</Text>
+      }
+    </View>
+  );
+}
+
 export default Home;
