@@ -47,7 +47,10 @@ export const BorderStyles = StyleSheet.create({
     borderBottomWidth: '1px'
   },
   yieldRow: {
-
+    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
+    borderBottomWidth: '1px',
+    borderTopColor: 'rgba(0, 0, 0, 0.3)',
+    borderTopWidth: '1px'
   },
   titleRow: {}
 })

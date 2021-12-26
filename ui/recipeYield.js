@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { TextStyles, LayoutStyles } from './stylesheets';
+import { TextStyles, LayoutStyles, BorderStyles } from './stylesheets';
 import { EmptyFieldError, NumericError } from './errors';
 
-const yieldStyles = StyleSheet.create({
+const YieldStyles = StyleSheet.create({
   label: {
     width: '70%',
     display: 'inline-block'
@@ -20,7 +20,7 @@ const yieldStyles = StyleSheet.create({
 
 const YieldLabel = () => {
   return (
-    <Text style={[TextStyles.paragraph, yieldStyles.label]}>Recipe Yield:</Text>
+    <Text style={[TextStyles.paragraph, YieldStyles.label]}>Recipe Yield:</Text>
   )
 }
 
@@ -40,7 +40,7 @@ const YieldAmount = ({ recipeYield, setYield, setNumError }) => {
       onChangeText={number => updateYieldAmount(number)}
       defaultValue={recipeYield.amount}
       keyboardType="numeric"
-      style={[TextStyles.paragraph, yieldStyles.amount]}
+      style={[TextStyles.paragraph, YieldStyles.amount]}
     />
   )
 }
@@ -50,13 +50,13 @@ export const RecipeYield = ({ recipeYield, setYield }) => {
 
   return (
     <>
-      <View style={LayoutStyles.row}>
+      <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
         <YieldLabel />
         <YieldAmount
           recipeYield={recipeYield}
           setYield={setYield}
           setNumError={setNumError} />
-        <Text style={[TextStyles.paragraph, yieldStyles.units]}>{recipeYield.units}</Text>
+        <Text style={[TextStyles.paragraph, YieldStyles.units]}>{recipeYield.units}</Text>
       </View>
       {numericError && <NumericError field="Yield amount" />}
     </>
@@ -78,7 +78,7 @@ export const EditYield = ({ recipeYield, setYield }) => {
 
   return (
     <>
-      <View style={LayoutStyles.row}>
+      <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
         <YieldLabel />
         <YieldAmount
           recipeYield={recipeYield}
@@ -87,7 +87,7 @@ export const EditYield = ({ recipeYield, setYield }) => {
         <TextInput
           onChangeText={text => updateUnits(text)}
           defaultValue={recipeYield.units}
-          style={[TextStyles.paragraph, yieldStyles.units]}
+          style={[TextStyles.paragraph, YieldStyles.units]}
         />
       </View>
       {numericError && <NumericError field="Yield amount" />}
