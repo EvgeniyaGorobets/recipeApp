@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button, TextInput, Text } from "react-native";
+import { View, Button, TextInput, StyleSheet } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import { addIngredient } from '../lib/dataStructures';
-import { computeIngrAmounts, formatIngrAmounts } from '../lib/computeIngredients';
+import { TextStyles, LayoutStyles } from './stylesheets';
+
+const ingrStyles = StyleSheet.create({
+  name: {
+    width: '60%',
+    display: 'inline-block'
+  },
+  amount: {
+    width: '20%',
+    display: 'inline-block' // should this be inline-flex? review flex
+  },
+  units: {
+    width: '20%',
+    display: 'inline-block'
+  }
+})
 
 const unitOptions = [
   { value: 'cups' },
@@ -24,6 +39,7 @@ const UnitSelect = ({ units, setUnits }) => {
       onChange={item => {
         setUnits(item.value);
       }}
+      style={[TextStyles.paragraph, ingrStyles.units]}
     />
   )
 }
@@ -39,17 +55,19 @@ export const EditIngredient = ({ ingredient, updateIngredient }) => {
   }, [name, amount, units])
 
   return (
-    <View>
+    <View style={LayoutStyles.row}>
       <TextInput
         placeholder="Ingredient Name"
         onChangeText={text => setName(text)}
         defaultValue={name}
+        style={[TextStyles.paragraph, ingrStyles.name]}
       />
       <TextInput
         placeholder="Amount"
         onChangeText={number => setAmount(number)}
         defaultValue={amount}
         keyboardType="numeric"
+        style={[TextStyles.paragraph, ingrStyles.amount]}
       />
       <UnitSelect units={units} setUnits={setUnits} />
     </View>
@@ -57,7 +75,6 @@ export const EditIngredient = ({ ingredient, updateIngredient }) => {
 }
 
 // consider replacing buttons with TouchableHighlight if you want to use a real icon
-// is it bad practice to pass usestate hooks as props?
 export const AddIngredient = ({ ingredients, setIngredients }) => {
   return ( 
     <Button
@@ -66,29 +83,7 @@ export const AddIngredient = ({ ingredients, setIngredients }) => {
         setIngredients(newIngr);
       }}
       title="+"
+      style={TextStyles.paragraph}
     />
-  )
-}
-
-const Ingredient = ({ name, amount }) => {
-  return (
-    <View>
-      <Text>{name}</Text>
-      <Text>{amount}</Text>
-    </View>
-  )
-}
-
-export const IngredientList = ({ ingredients, baseYield, newYield }) => {
-  const ingrList = computeIngrAmounts(ingredients, baseYield, newYield);
-  const formattedIngr = formatIngrAmounts(ingrList);
-
-  return(
-    <View>
-      {Object.keys(formattedIngr).map(ingrName => {
-        const amount = formattedIngr[ingrName];
-        return (<Ingredient name={ingrName} amount={amount} key={ingrName} />);
-      })}
-    </View>
   )
 }

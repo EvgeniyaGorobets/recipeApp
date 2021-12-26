@@ -1,48 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { View, Button, TextInput, Text } from "react-native";
+import { View, Button } from "react-native";
 import { RecipesContext } from '../App';
-import { EditIngredient, AddIngredient } from './ingredients';
+import { EditIngredient, AddIngredient, EditRecipeName, EditYield, LayoutStyles } from '../ui';
 import { newRecipe, addRecipe } from '../lib/dataStructures';
-
-const EditYield = ({ recipeYield, setYield }) => {
-  const [numericError, setNumError] = useState(false);
-  const [emptyUnitError, setUnitError] = useState(false);
-
-  const updateAmount = (newAmount) => {
-    setNumError(false);
-    setYield({ ...recipeYield, amount: newAmount});
-
-    if (isNaN(+newAmount)) {
-      setNumError(true);
-    }
-  } 
-
-  const updateUnits = (newUnits) => {
-    setUnitError(false);
-    setYield({ ...recipeYield, units: newUnits});
-    
-    if (newUnits.length == 0) {
-      setUnitError(true);
-    }
-  }
-
-  return (
-    <View>
-      <TextInput
-        placeholder="Amount"
-        onChangeText={number => updateAmount(number)}
-        defaultValue={recipeYield.amount}
-        keyboardType="numeric"
-      />
-      <TextInput
-        onChangeText={text => updateUnits(text)}
-        defaultValue={recipeYield.units}
-      />
-      {numericError && <Text>Yield amount must be a number.</Text>}
-      {emptyUnitError && <Text>Yield units cannot be empty.</Text>}
-    </View>
-  )
-}
 
 const EditRecipe = ({ navigation, route }) => {
   const {recipes, updateRecipes} = useContext(RecipesContext);
@@ -54,12 +14,8 @@ const EditRecipe = ({ navigation, route }) => {
   const [ingredients, setIngr] = useState(recipe.ingredients);
 
   return (
-    <View>
-      <TextInput
-        placeholder="Recipe Name"
-        onChangeText={text => setName(text)}
-        defaultValue={recipeName}
-      />
+    <View style={LayoutStyles.screen}>
+      <EditRecipeName name={recipeName} setName={setName} />
       <EditYield recipeYield={recipeYield} setYield={setYield} />
       {ingredients.map((ingredient, index) => {
 

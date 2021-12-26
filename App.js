@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './ui/Home';
-import ViewRecipe from './ui/ViewRecipe';
-import EditRecipe from './ui/EditRecipe';
+import { Home, ViewRecipe, EditRecipe } from './screens'
 import { getRecipes, saveRecipes } from './lib/localStorage';
 
 // Next Steps:

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Button } from "react-native";
 import { RecipesContext } from '../App';
+import { LayoutStyles } from '../ui';
 
 const testRecipes = {
   "Chocolate Chip Cookies": {
@@ -63,7 +64,7 @@ const Home = ({ navigation }) => {
   const {recipes, updateRecipes} = useContext(RecipesContext)
 
   return (
-    <View>
+    <View style={LayoutStyles.screen}>
       {recipes ?
         Object.keys(recipes).map(recipe => {
           return (<RecipeCard recipeName={recipe} key={recipe} navigation={navigation} />);
