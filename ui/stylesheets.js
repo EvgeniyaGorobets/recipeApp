@@ -6,12 +6,12 @@ export const TextStyles = StyleSheet.create({
     backgroundColor: 'white',
     fontSize: 16
     // TODO: get roboto and make it roboto
-    // also add padding
   },
   title: {
     color: 'black',
     backgroundColor: 'white',
-    fontSize: 24
+    fontSize: 24,
+    flexGrow: 1
     // TODO: font style is roboto, add padding
   },
   error: {

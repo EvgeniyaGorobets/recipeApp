@@ -73,17 +73,3 @@ export const EditIngredient = ({ ingredient, updateIngredient }) => {
     </View>
   )
 }
-
-// consider replacing buttons with TouchableHighlight if you want to use a real icon
-export const AddIngredient = ({ ingredients, setIngredients }) => {
-  return ( 
-    <Button
-      onPress={() => { 
-        const newIngr = addIngredient(ingredients);
-        setIngredients(newIngr);
-      }}
-      title="+"
-      style={TextStyles.paragraph}
-    />
-  )
-}
