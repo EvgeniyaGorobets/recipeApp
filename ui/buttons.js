@@ -1,37 +1,67 @@
-import React from 'react';
-import { Button, StyleSheet } from "react-native";
-
-// TODO: buttons dont accept style props so use Pressable or TouchableHighlight
+import React, { useContext, useState } from 'react';
+import { Pressable, Text, StyleSheet, View } from "react-native";
+import { TextStyles, LayoutStyles } from './stylesheets';
+import { addRecipe } from '../lib';
+import { RecipesContext } from '../App';
+import { DuplicateNameError } from './errors';
 
 const ButtonStyles = StyleSheet.create({
-  android: {
+  button: {
     color: 'white',
     backgroundColor: '#2f80ed',
-    margin: '15px',
-    position: 'fixed' // review the positions of css and how to get it to be at the bottom
+    width: '100%',
+    textAlign: 'center',
+    padding: '10px',
+    borderRadius: '7px',
+    flexGrow: 1
+  },
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    paddingBottom: '15px'
   }
 })
 
 export const EditButton = ({ recipeName, navigate }) => {
-  return(
-    <Button
-      onPress={() => { navigate('EditRecipe', { recipe: recipeName }) }}
-      title="Edit Recipe"
-      style={ButtonStyles.android}
-    />
+  return (
+    <View style={[LayoutStyles.row, ButtonStyles.container]} >
+      <Pressable
+        onPress={() => { navigate('EditRecipe', { recipe: recipeName }) }}
+        style={ButtonStyles.button}>
+        <Text style={TextStyles.button}>Edit Recipe</Text>
+      </Pressable>
+    </View>
   )
 }
 
-export const SaveButton = () => {
-  return(
-    <Button
-        onPress={() => {
-          const newRecipes = addRecipe(recipes, initialName, recipeName, recipeYield, ingredients);
-          updateRecipes(newRecipes);
-          navigation.navigate('ViewRecipe', { recipe: recipeName });
-        }}
-        title="Save Recipe"
-        style={ButtonStyles.android}
-      />
+export const SaveButton = (props) => {
+  const {oldName, newName, recipeYield, ingredients, navigate} = props;
+  const {recipes, updateRecipes} = useContext(RecipesContext);
+  const [nameError, setError] = useState(false);
+
+  const saveRecipe = () => {
+    try {
+      setError(false);
+      const newRecipes = addRecipe(recipes, oldName, newName, recipeYield, ingredients);
+      updateRecipes(newRecipes);
+      navigate('ViewRecipe', { recipe: newName });
+    } catch (e) {
+      console.log(e);
+      setError(true);
+    }
+    
+  }
+
+  return (
+    <>
+    {nameError && <DuplicateNameError name={newName}/> }
+    <View style={[LayoutStyles.row, ButtonStyles.container]} >
+      <Pressable
+        onPress={saveRecipe}
+        style={ButtonStyles.button}>
+        <Text style={TextStyles.button}>Save Recipe</Text>
+      </Pressable>
+    </View>
+    </>
   )
 }

@@ -17,9 +17,13 @@ export const TextStyles = StyleSheet.create({
   error: {
     color: 'red',
     backgroundColor: 'white',
-    fontSize: 24,
+    fontSize: 16,
     border: 'red'
     // TODO: font style is roboto, add padding
+  },
+  button: {
+    color: 'white',
+    fontSize: 20
   }
 });
 

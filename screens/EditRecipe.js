@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import { RecipesContext } from '../App';
-import { EditIngredient, AddIngredient, EditRecipeName, EditYield, LayoutStyles } from '../ui';
-import { newRecipe, addRecipe } from '../lib/dataStructures';
+import { EditIngredient, AddIngredient, EditRecipeName, EditYield, LayoutStyles, SaveButton } from '../ui';
+import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {
   const {recipes, updateRecipes} = useContext(RecipesContext);
@@ -30,13 +30,12 @@ const EditRecipe = ({ navigation, route }) => {
         return (<EditIngredient ingredient={ingredient} updateIngredient={updateIngr} key={index} />)
       })}
       <AddIngredient ingredients={ingredients} setIngredients={setIngr} />
-      <Button
-        onPress={() => {
-          const newRecipes = addRecipe(recipes, initialName, recipeName, recipeYield, ingredients);
-          updateRecipes(newRecipes);
-          navigation.navigate('ViewRecipe', { recipe: recipeName });
-        }}
-        title="Save Recipe"
+      <SaveButton 
+        oldName={initialName} 
+        newName={recipeName}
+        recipeYield={recipeYield}
+        ingredients={ingredients}
+        navigate={navigation.navigate}
       />
     </View>
   )

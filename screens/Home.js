@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Button } from "react-native";
 import { RecipesContext } from '../App';
-import { LayoutStyles } from '../ui';
+import { LayoutStyles, RecipeCard } from '../ui';
 
 const testRecipes = {
   "Chocolate Chip Cookies": {
@@ -36,17 +36,6 @@ const testRecipes = {
   }
 }
 
-const RecipeCard = (props) => {
-  return (
-    <Button
-      onPress={() => {
-        props.navigation.navigate('ViewRecipe', { recipe: props.recipeName })
-      }}
-      title={props.recipeName}
-    />
-  );
-}
-
 // consider replacing buttons with TouchableHighlight if you want to use a real icon
 const AddRecipe = ({ navigation }) => {
   return (
@@ -59,7 +48,6 @@ const AddRecipe = ({ navigation }) => {
   )
 }
 
-
 const Home = ({ navigation }) => {
   const {recipes, updateRecipes} = useContext(RecipesContext)
 
@@ -67,7 +55,7 @@ const Home = ({ navigation }) => {
     <View style={LayoutStyles.screen}>
       {recipes ?
         Object.keys(recipes).map(recipe => {
-          return (<RecipeCard recipeName={recipe} key={recipe} navigation={navigation} />);
+          return (<RecipeCard recipeName={recipe} key={recipe} navigate={navigation.navigate} />);
         }) : null //<Text>Loading Recipes... (but what if there are no recipes?)</Text>
       }
       <AddRecipe navigation={navigation} />
