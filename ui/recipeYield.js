@@ -5,16 +5,13 @@ import { EmptyFieldError, NumericError } from './errors';
 
 const YieldStyles = StyleSheet.create({
   label: {
-    width: '70%',
-    display: 'inline-block'
+    width: '65%'
   },
   amount: {
-    width: '10%',
-    display: 'inline-block'
+    width: '15%'
   },
   units: {
-    width: '20%',
-    display: 'inline-block' // should this be inline-flex? review flex
+    width: '20%'
   }
 })
 
