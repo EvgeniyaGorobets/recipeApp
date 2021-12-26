@@ -32,14 +32,22 @@ export const LayoutStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '15px',
-    paddingRight: '15px'
+    paddingBottom: '5px'
   },
   screen: {
     backgroundColor: 'white',
     height: '100%',
-    paddingTop: '15px',
-    paddingBottom: '15px'
+    padding: '15px'
   }
 });
+
+export const BorderStyles = StyleSheet.create({
+  ingredientRow: {
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    borderBottomWidth: '1px'
+  },
+  yieldRow: {
+
+  },
+  titleRow: {}
+})

@@ -15,11 +15,7 @@ const ButtonStyles = StyleSheet.create({
     borderRadius: '7px',
     flexGrow: 1
   },
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    paddingBottom: '15px'
-  }
+  container: {  } // this used to have styling but now it doesnt.. delete?
 })
 
 export const EditButton = ({ recipeName, navigate }) => {

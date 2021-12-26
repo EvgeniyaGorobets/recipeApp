@@ -1,5 +1,5 @@
 import { EditIngredient } from "./editIngredient";
-import { IngredientList } from "./viewIngredient";
+import { IngredientList } from "./ingredientList";
 import { RecipeYield, EditYield } from "./recipeYield";
 import { RecipeName, EditRecipeName } from "./recipeName";
 import { EditButton, SaveButton } from "./buttons";

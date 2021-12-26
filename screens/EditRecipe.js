@@ -17,19 +17,7 @@ const EditRecipe = ({ navigation, route }) => {
     <View style={LayoutStyles.screen}>
       <EditRecipeName name={recipeName} setName={setName} />
       <EditYield recipeYield={recipeYield} setYield={setYield} />
-      {ingredients.map((ingredient, index) => {
-
-        // Create a callback specific for updating this ingredient in the ingredients const
-        const updateIngr = (newIngr) => {
-          const newIngredients = [ ...ingredients ];
-          // idk a cleaner way to do this; it doesnt count as mutating a data structure if i'm creating a new one first
-          newIngredients[index] = newIngr;
-          setIngr(newIngredients);
-        }
-
-        return (<EditIngredient ingredient={ingredient} updateIngredient={updateIngr} key={index} />)
-      })}
-      <AddIngredientCard ingredients={ingredients} setIngredients={setIngr} />
+      
       <SaveButton 
         oldName={initialName} 
         newName={recipeName}

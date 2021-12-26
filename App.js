@@ -6,10 +6,10 @@ import { Home, ViewRecipe, EditRecipe } from './screens'
 import { getRecipes, saveRecipes } from './lib/localStorage';
 
 // Next Steps:
-// 1) Styling (do in car, load resources in advance)
-// 2) Input checks (no empty recipe names, amounts are only numbers, max 3 places after decimal precision)
-// 3) Recipe yield controls/functionality
-// 4) Deleting ingredients and recipes
+// 1) Refactor UI elements and move context to UI?
+// 2) Finish borders so that it looks like figma
+// 3) Add input checks so that no empty fields are allowed and numbers have only 3 digits after decimal (may need to refactor)
+// 4) Deleting ingredients and recipes (x icon for incredients on left, red button on edit recipe screen for recipe)
 // 5) User feedback when stuff fails
 // 6) Notify use when you're close to the memory limit
 // 7) Backups/exports
