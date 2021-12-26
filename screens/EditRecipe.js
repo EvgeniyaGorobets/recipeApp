@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import { RecipesContext } from '../App';
-import { EditIngredient, AddIngredientCard, EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList } from '../ui';
+import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList } from '../ui';
 import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {

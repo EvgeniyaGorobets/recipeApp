@@ -42,9 +42,9 @@ export default function App() {
     <RecipesContext.Provider value={{recipes, updateRecipes}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="ViewRecipe" component={ViewRecipe} />
-          <Stack.Screen name="EditRecipe" component={EditRecipe} />
+          <Stack.Screen name="Home" component={Home} options={{ title: "Alexey's Recipe App" }}/>
+          <Stack.Screen name="ViewRecipe" component={ViewRecipe} options={{ title: 'View Recipe' }} />
+          <Stack.Screen name="EditRecipe" component={EditRecipe} options={{ title: 'Edit Recipe' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </RecipesContext.Provider>
