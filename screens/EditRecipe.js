@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import { RecipesContext } from '../App';
-import { EditIngredient, AddIngredientCard, EditRecipeName, EditYield, LayoutStyles, SaveButton } from '../ui';
+import { EditIngredient, AddIngredientCard, EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList } from '../ui';
 import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {
@@ -17,7 +17,7 @@ const EditRecipe = ({ navigation, route }) => {
     <View style={LayoutStyles.screen}>
       <EditRecipeName name={recipeName} setName={setName} />
       <EditYield recipeYield={recipeYield} setYield={setYield} />
-      
+      <EditIngredientList ingredients={ingredients} setIngredients={setIngr} />
       <SaveButton 
         oldName={initialName} 
         newName={recipeName}

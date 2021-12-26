@@ -1,7 +1,8 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
 import { addIngredient } from '../lib';
+import { PlusIcon } from './icons';
+import { BorderStyles } from './stylesheets';
 
 const CardStyle = StyleSheet.create({
   container: {
@@ -28,32 +29,12 @@ export const RecipeCard = ({ recipeName, navigate }) => {
   )
 }
 
-// refactor so that the centered icon is the reusable bit not the card, because it's not really a card for ingredients
-const PlusCard = ({ onPress, iconSize }) => {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={CardStyle.container}>
-      <Ionicons name="md-add" size={iconSize} color="black" style={{margin: 'auto'}}/>
-    </Pressable>
-  )
-}
-
 export const AddRecipeCard = ({ navigate }) => {
   return (
-    <PlusCard 
+    <Pressable
       onPress={() => {navigate('EditRecipe', { recipe: "" })}}
-      iconSize={32} />
-  )
-}
-
-export const AddIngredientCard = ({ingredients, setIngredients}) => {
-  const onPress = () => { 
-    const newIngr = addIngredient(ingredients);
-    setIngredients(newIngr);
-  }
-
-  return (
-    <PlusCard onPress={onPress} iconSize={24} />
+      style={CardStyle.container}>
+      <PlusIcon iconSize={32} />
+    </Pressable>
   )
 }

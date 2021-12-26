@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import { TextStyles, LayoutStyles, BorderStyles } from './stylesheets';
+import { PlusIcon, DeleteIcon } from './icons';
 
 const IngrStyles = StyleSheet.create({
+  icon: {
+    width: '10%',
+    margin: 'auto'
+  },
   name: {
-    width: '60%'
+    width: '50%'
   },
   amount: {
     width: '20%'
@@ -44,13 +49,26 @@ const EditIngredient = ({ ingredients, setIngredients, index }) => {
   const ingr = ingredients[index];
 
   const updateIngredient = (key, value) => {
+    // TODO: these two lines should probably be in dataStructures.js
     const newIngredients = [...ingredients];
     newIngredients[index] = { ...ingr, [key]: value };
     setIngredients(newIngredients);
   }
 
+  // also move to datastructure.js probably
+  const deleteIngredient = () => {
+    const newIngredients = [...ingredients];
+    newIngredients.splice(index, 1);
+    setIngredients(newIngredients);
+  }
+
   return (
     <View style={[LayoutStyles.row, BorderStyles.ingredientRow]}>
+      <Pressable 
+        style={IngrStyles.icon}
+        onPress={deleteIngredient}>
+        <DeleteIcon iconSize={16}/>
+      </Pressable>
       <TextInput
         placeholder="Ingredient Name"
         onChangeText={text => updateIngredient('name', text)}
@@ -71,6 +89,20 @@ const EditIngredient = ({ ingredients, setIngredients, index }) => {
   )
 }
 
+const AddIngredient = ({ingredients, setIngredients}) => {
+  const onPress = () => { 
+    const newIngr = addIngredient(ingredients);
+    setIngredients(newIngr);
+  }
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={[LayoutStyles.row, BorderStyles.ingredientRow]}>
+      <PlusIcon iconSize={24} />
+    </Pressable>
+  )
+}
 
 export const EditIngredientList = ({ ingredients, setIngredients }) => {
   return (
@@ -78,12 +110,12 @@ export const EditIngredientList = ({ ingredients, setIngredients }) => {
       {ingredients.map((ingredient, index) => {
         return (
           <EditIngredient 
-            ingredient={ingredient} 
+            ingredients={ingredients} 
             setIngredients={setIngredients} 
             index={index}
             key={index} />)
       })}
-      <AddIngredientCard ingredients={ingredients} setIngredients={setIngr} />
+      <AddIngredient ingredients={ingredients} setIngredients={setIngredients} />
     </View>
   )
 }
