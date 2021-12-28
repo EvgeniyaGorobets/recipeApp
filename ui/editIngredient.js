@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
-import { TextStyles, LayoutStyles, BorderStyles } from './stylesheets';
+import { TextStyles, LayoutStyles, BorderStyles, FormStyles } from './stylesheets';
 import { PlusIcon, DeleteIcon } from './icons';
+import { EmptyFieldError, NumericError } from './errors';
+import { addIngredient } from '../lib';
 
 const IngrStyles = StyleSheet.create({
   icon: {
-    width: '10%',
+    width: '7%',
     margin: 'auto'
   },
   name: {
-    width: '50%'
+    width: '53%'
   },
   amount: {
     width: '20%'
@@ -19,6 +21,11 @@ const IngrStyles = StyleSheet.create({
     width: '20%'
   }
 })
+
+const textInputStyle = StyleSheet.flatten([TextStyles.paragraph, FormStyles.textInput]);
+
+// consider refactoring styles more
+// i want the error msgs on the inside of the bottom line
 
 const unitOptions = [
   { value: 'cups' },
@@ -40,18 +47,28 @@ const UnitSelect = ({ units, setUnits }) => {
       onChange={item => {
         setUnits(item.value);
       }}
-      style={[TextStyles.paragraph, IngrStyles.units]}
+      style={[textInputStyle, IngrStyles.units]}
     />
   )
 }
 
-const EditIngredient = ({ ingredients, setIngredients, index }) => {
-  const ingr = ingredients[index];
+const EditIngredient = ({ ingredients, setIngredients, index, showErrors }) => {
+  const ingredient = ingredients[index];
+
+  const emptyNameError = (ingredient.name == "");
+  const emptyAmountError = (ingredient.amount == "");
+  const amountNaNError = (ingredient.amount == "");
+
+  console.log(IngrStyles)
+
+  const errorBorder = (error) => {
+    return (showErrors && error ? FormStyles.errorInput : null);
+  }
 
   const updateIngredient = (key, value) => {
     // TODO: these two lines should probably be in dataStructures.js
     const newIngredients = [...ingredients];
-    newIngredients[index] = { ...ingr, [key]: value };
+    newIngredients[index] = { ...ingredient, [key]: value };
     setIngredients(newIngredients);
   }
 
@@ -63,34 +80,40 @@ const EditIngredient = ({ ingredients, setIngredients, index }) => {
   }
 
   return (
-    <View style={[LayoutStyles.row, BorderStyles.ingredientRow]}>
-      <Pressable 
-        style={IngrStyles.icon}
-        onPress={deleteIngredient}>
-        <DeleteIcon iconSize={16}/>
-      </Pressable>
-      <TextInput
-        placeholder="Ingredient Name"
-        onChangeText={text => updateIngredient('name', text)}
-        defaultValue={ingr.name}
-        style={[TextStyles.paragraph, IngrStyles.name]}
-      />
-      <TextInput
-        placeholder="Amount"
-        onChangeText={number => updateIngredient('amount', number)}
-        defaultValue={ingr.amount}
-        keyboardType="numeric"
-        style={[TextStyles.paragraph, IngrStyles.amount]}
-      />
-      <UnitSelect 
-        units={ingr.units} 
-        setUnits={(newUnits) => {updateIngredient('units', newUnits)}} />
-    </View>
+    <>
+      <View style={[LayoutStyles.row, BorderStyles.ingredientRow]}>
+        <Pressable
+          style={IngrStyles.icon}
+          onPress={deleteIngredient}>
+          <DeleteIcon iconSize={16} />
+        </Pressable>
+        <TextInput
+          placeholder="Ingredient Name"
+          onChangeText={text => updateIngredient('name', text)}
+          defaultValue={ingredient.name}
+          style={[textInputStyle, IngrStyles.name, errorBorder(emptyNameError)]}
+        />
+        <TextInput
+          placeholder="Amount"
+          onChangeText={number => updateIngredient('amount', number)}
+          defaultValue={ingredient.amount}
+          keyboardType="numeric"
+          style={[textInputStyle, IngrStyles.amount, errorBorder(emptyAmountError || amountNaNError)]}
+        />
+        <UnitSelect
+          units={ingredient.units}
+          setUnits={(newUnits) => { updateIngredient('units', newUnits) }} />
+      </View>
+
+      {showErrors && emptyNameError && <EmptyFieldError field={"Ingredient name"} />}
+      {showErrors && emptyAmountError && <EmptyFieldError field={"Ingredient amount"} />}
+      {showErrors && amountNaNError && <NumericError field={"Ingredient amount"} />}
+    </>
   )
 }
 
-const AddIngredient = ({ingredients, setIngredients}) => {
-  const onPress = () => { 
+const AddIngredient = ({ ingredients, setIngredients }) => {
+  const onPress = () => {
     const newIngr = addIngredient(ingredients);
     setIngredients(newIngr);
   }
@@ -104,18 +127,20 @@ const AddIngredient = ({ingredients, setIngredients}) => {
   )
 }
 
-export const EditIngredientList = ({ ingredients, setIngredients }) => {
+export const EditIngredientList = ({ ingredients, setIngredients, showErrors }) => {
   return (
-    <View style={{flexGrow: 1}}>
+    <View style={{ flexGrow: 1 }}>
       {ingredients.map((ingredient, index) => {
         return (
-          <EditIngredient 
-            ingredients={ingredients} 
-            setIngredients={setIngredients} 
+          <EditIngredient
+            ingredients={ingredients}
+            setIngredients={setIngredients}
             index={index}
-            key={index} />)
+            key={index}
+            showErrors={showErrors} />)
       })}
       <AddIngredient ingredients={ingredients} setIngredients={setIngredients} />
     </View>
+
   )
 }

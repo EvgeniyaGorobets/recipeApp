@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { TextStyles, LayoutStyles, BorderStyles } from './stylesheets';
+import { TextStyles, LayoutStyles, BorderStyles, FormStyles } from './stylesheets';
 import { EmptyFieldError, NumericError } from './errors';
 
 const YieldStyles = StyleSheet.create({
   label: {
-    width: '65%'
+    width: '60%'
   },
   amount: {
-    width: '15%'
+    width: '20%'
   },
   units: {
     width: '20%'
@@ -21,74 +21,60 @@ const YieldLabel = () => {
   )
 }
 
-const YieldAmount = ({ recipeYield, setYield, setNumError }) => {
-  const updateYieldAmount = (newAmount) => {
-    setNumError(false);
-    setYield({ ...recipeYield, amount: newAmount });
-
-    // If yield amount is non-numeric, raise error
-    if (isNaN(+newAmount)) {
-      setNumError(true);
-    }
-  }
-
+const YieldAmount = ({ recipeYield, setYield, showErrors }) => {
+  const amountEmptyError = (recipeYield.amount == "");
+  const amountNaNError = isNaN(+recipeYield.amount);
+  const errorBorder = 
+    (showErrors && (amountNaNError || amountEmptyError) ? FormStyles.errorInput : null);
+  
   return (
     <TextInput
-      onChangeText={number => updateYieldAmount(number)}
+      onChangeText={number => setYield({ ...recipeYield, amount: number })}
       defaultValue={recipeYield.amount}
       keyboardType="numeric"
-      style={[TextStyles.paragraph, YieldStyles.amount]}
+      placeholder="Amount"
+      style={[TextStyles.paragraph, YieldStyles.amount, FormStyles.textInput,errorBorder]}
     />
   )
 }
 
 export const RecipeYield = ({ recipeYield, setYield }) => {
-  const [numericError, setNumError] = useState(false);
-
   return (
     <>
       <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
         <YieldLabel />
-        <YieldAmount
-          recipeYield={recipeYield}
-          setYield={setYield}
-          setNumError={setNumError} />
+        <YieldAmount recipeYield={recipeYield} setYield={setYield} />
         <Text style={[TextStyles.paragraph, YieldStyles.units]}>{recipeYield.units}</Text>
       </View>
-      {numericError && <NumericError field="Yield amount" />}
+      {isNaN(+recipeYield.amount) && <NumericError field="Yield amount" />}
     </>
   )
 }
 
-export const EditYield = ({ recipeYield, setYield }) => {
-  const [numericError, setNumError] = useState(false);
-  const [emptyUnitError, setUnitError] = useState(false);
-
-  const updateUnits = (newUnits) => {
-    setUnitError(false);
-    setYield({ ...recipeYield, units: newUnits });
-
-    if (newUnits.length == 0) {
-      setUnitError(true);
-    }
-  }
+export const EditYield = ({ recipeYield, setYield, showErrors }) => {
+  const amountEmptyError = (recipeYield.amount == "");
+  const amountNaNError = isNaN(+recipeYield.amount);
+  const unitEmptyError = (recipeYield.units == "");
+  const unitsBorder = (unitEmptyError && showErrors) ? FormStyles.errorInput : null;
 
   return (
     <>
       <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
         <YieldLabel />
-        <YieldAmount
-          recipeYield={recipeYield}
+        <YieldAmount 
+          recipeYield={recipeYield} 
           setYield={setYield}
-          setNumError={setNumError} />
+          showErrors={showErrors} />
         <TextInput
-          onChangeText={text => updateUnits(text)}
+          onChangeText={text => setYield({ ...recipeYield, units: text })}
           defaultValue={recipeYield.units}
-          style={[TextStyles.paragraph, YieldStyles.units]}
+          placeholder="Units"
+          style={[TextStyles.paragraph, YieldStyles.units, FormStyles.textInput, unitsBorder]}
         />
       </View>
-      {numericError && <NumericError field="Yield amount" />}
-      {emptyUnitError && <EmptyFieldError field="Yield units" />}
+      {showErrors && amountNaNError && <NumericError field="Yield amount" />}
+      {showErrors && amountEmptyError && <EmptyFieldError field="Yield amount" />}
+      {showErrors && unitEmptyError && <EmptyFieldError field="Yield units" />}
     </>
   )
 }

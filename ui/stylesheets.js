@@ -17,7 +17,7 @@ export const TextStyles = StyleSheet.create({
   error: {
     color: 'red',
     backgroundColor: 'white',
-    fontSize: 16,
+    fontSize: 12,
     border: 'red'
     // TODO: font style is roboto, add padding
   },
@@ -38,6 +38,10 @@ export const LayoutStyles = StyleSheet.create({
     backgroundColor: 'white',
     height: '100%',
     padding: '15px'
+  },
+  errorRow: {
+    width: '100%',
+    paddingTop: '5px'
   }
 });
 
@@ -51,6 +55,16 @@ export const BorderStyles = StyleSheet.create({
     borderBottomWidth: '1px',
     borderTopColor: 'rgba(0, 0, 0, 0.3)',
     borderTopWidth: '1px'
+  }
+})
+
+export const FormStyles = StyleSheet.create({
+  textInput: {
+    marginLeft: '2px',
+    marginRight: '2px'
   },
-  titleRow: {}
+  errorInput: {
+    borderBottomColor: 'red',
+    borderBottomWidth: '2px'
+  }
 })

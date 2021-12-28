@@ -4,7 +4,7 @@ import { TextStyles, LayoutStyles } from './stylesheets';
 
 export const EmptyFieldError = ({ field }) => {
   return (
-    <View style={LayoutStyles.row}>
+    <View style={LayoutStyles.errorRow}>
       <Text style={TextStyles.error}>{field} cannot be empty.</Text>
     </View>
   )
@@ -12,7 +12,7 @@ export const EmptyFieldError = ({ field }) => {
 
 export const NumericError = ({ field }) => {
   return (
-    <View style={LayoutStyles.row}>
+    <View style={LayoutStyles.errorRow}>
       <Text style={TextStyles.error}>{field} must be a number.</Text>
     </View>
   )

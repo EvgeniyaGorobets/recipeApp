@@ -31,26 +31,24 @@ export const EditButton = ({ recipeName, navigate }) => {
 }
 
 export const SaveButton = (props) => {
-  const {oldName, newName, recipeYield, ingredients, navigate} = props;
+  const {oldName, newName, recipeYield, ingredients, navigate, showErrors} = props;
   const {recipes, updateRecipes} = useContext(RecipesContext);
-  const [nameError, setError] = useState(false);
 
   const saveRecipe = () => {
     try {
-      setError(false);
       const newRecipes = addRecipe(recipes, oldName, newName, recipeYield, ingredients);
       updateRecipes(newRecipes);
       navigate('ViewRecipe', { recipe: newName });
     } catch (e) {
       console.log(e);
-      setError(true);
+      showErrors(true);
     }
     
   }
 
   return (
     <>
-    {nameError && <DuplicateNameError name={newName}/> }
+    {(oldName != newName) && (newName in recipes) && <DuplicateNameError name={newName}/> }
     <View style={[LayoutStyles.row, ButtonStyles.container]} >
       <Pressable
         onPress={saveRecipe}

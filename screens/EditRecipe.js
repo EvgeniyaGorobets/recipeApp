@@ -12,18 +12,20 @@ const EditRecipe = ({ navigation, route }) => {
   const [recipeName, setName] = useState(recipe.name);
   const [recipeYield, setYield] = useState(recipe.yield);
   const [ingredients, setIngr] = useState(recipe.ingredients);
+  const [showErrors, setErrorVisibility] = useState(false);
 
   return (
     <View style={LayoutStyles.screen}>
-      <EditRecipeName name={recipeName} setName={setName} />
-      <EditYield recipeYield={recipeYield} setYield={setYield} />
-      <EditIngredientList ingredients={ingredients} setIngredients={setIngr} />
+      <EditRecipeName name={recipeName} setName={setName} showErrors={showErrors} />
+      <EditYield recipeYield={recipeYield} setYield={setYield} showErrors={showErrors} />
+      <EditIngredientList ingredients={ingredients} setIngredients={setIngr} showErrors={showErrors} />
       <SaveButton 
         oldName={initialName} 
         newName={recipeName}
         recipeYield={recipeYield}
         ingredients={ingredients}
         navigate={navigation.navigate}
+        showErrors={setErrorVisibility}
       />
     </View>
   )
