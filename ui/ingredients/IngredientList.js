@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from "react-native";
-import { computeIngrAmounts, formatIngrAmounts } from '../../lib';
+import { computeIngrAmounts, formatAmount } from '../../lib';
 import { TextStyles, LayoutStyles, BorderStyles } from '../style/stylesheets';
 import { IngrWidths } from './ingredientStyles';
 
@@ -15,13 +15,12 @@ const IngredientRow = ({ name, amount }) => {
 
 const IngredientList = ({ ingredients, baseYield, newYield }) => {
   const ingrList = computeIngrAmounts(ingredients, baseYield, newYield);
-  const formattedIngr = formatIngrAmounts(ingrList);
 
   return(
     <View style={{flexGrow: 1}}>
-      {Object.keys(formattedIngr).map(ingrName => {
-        const amount = formattedIngr[ingrName];
-        return (<IngredientRow name={ingrName} amount={amount} key={ingrName} />);
+      {ingrList.map((ingredient, index) => {
+        const amount = formatAmount(ingredient.amount, ingredient.units);
+        return (<IngredientRow name={ingredient.name} amount={amount} key={index} />);
       })}
     </View>
   )

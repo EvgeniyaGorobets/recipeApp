@@ -15,7 +15,6 @@ const EditIngredientRow = ({ ingredients, setIngredients, index, showErrors }) =
 
   // this is my attempt at currying
   const update = (property, value) => {
-    console.log(property, value)
     const newIngredients = updateIngredient(ingredients, index, property, value);
     setIngredients(newIngredients);
   }
