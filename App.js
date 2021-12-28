@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home, ViewRecipe, EditRecipe } from './screens'
-import { getRecipes, saveRecipes } from './lib/localStorage';
+import { getRecipes, saveRecipes } from './lib';
 
 // Next Steps:
-// 1) Refactor UI elements and move context to UI?
-// 2) Finish borders so that it looks like figma
-// 3) Add input checks so that no empty fields are allowed and numbers have only 3 digits after decimal (may need to refactor)
-// 4) Deleting ingredients and recipes (x icon for incredients on left, red button on edit recipe screen for recipe)
-// 5) User feedback when stuff fails
+// 1) Consider more refactoring (maybe look at examples)
+// 2) Add delete recipe button and general recipe functions (change how addrecipe works)
+// 3) Add input checks so that numbers have only 3 digits after decimal
+// 4) add cups/tsp conversions
+// 5) move context somewhere else
 // 6) Notify use when you're close to the memory limit
 // 7) Backups/exports
 

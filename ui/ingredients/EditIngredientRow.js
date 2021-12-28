@@ -4,14 +4,11 @@ import { LayoutStyles, BorderStyles } from '../style/stylesheets';
 import { DeleteIcon } from '../style/icons';
 import UnitSelect from './UnitSelect';
 import IngredientAmountInput from './IngredientAmountInput';
-import IngredientNameInput from '../forms/IngredientNameInput'
+import IngredientNameInput from './IngredientNameInput'
 import { EmptyFieldError, NumericError } from '../generic/errors';
 import { updateIngredient, deleteIngredient } from '../../lib';
 import { IngrWidths } from './ingredientStyles';
 
-
-// consider refactoring styles more
-// i want the error msgs on the inside of the bottom line
 
 const EditIngredientRow = ({ ingredients, setIngredients, index, showErrors }) => {
   const ingredient = ingredients[index];
