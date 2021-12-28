@@ -32,7 +32,8 @@ export const LayoutStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     paddingTop: '5px',
-    paddingBottom: '5px'
+    paddingBottom: '5px',
+    flexWrap: 'wrap'
   },
   screen: {
     backgroundColor: 'white',

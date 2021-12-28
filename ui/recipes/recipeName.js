@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
-import { EmptyFieldError } from './errors';
-import { TextStyles, LayoutStyles, BorderStyles } from './stylesheets';
+import { EmptyFieldError } from '../generic/errors';
+import { TextStyles, LayoutStyles, FormStyles } from '../style/stylesheets';
 
 export const RecipeName = ({ name }) => {
   return (
@@ -13,10 +13,9 @@ export const RecipeName = ({ name }) => {
 
 export const EditRecipeName = ({ name, setName, showErrors }) => {
   const nameError = (name == "");
-  const errorBorder = (nameError && showErrors) ? BorderStyles.errorInput : null;
+  const errorBorder = (nameError && showErrors) ? FormStyles.errorInput : null;
 
   return (
-    <>
       <View style={[LayoutStyles.row, errorBorder]}>
         <TextInput
           placeholder="Recipe Name"
@@ -24,8 +23,7 @@ export const EditRecipeName = ({ name, setName, showErrors }) => {
           defaultValue={name}
           style={TextStyles.title}
         />
+        {showErrors && nameError && <EmptyFieldError field="Recipe name" />}
       </View>
-      {showErrors && nameError && <EmptyFieldError field="Recipe name" />}
-    </>
   )
 }

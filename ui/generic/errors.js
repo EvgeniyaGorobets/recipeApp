@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TextStyles, LayoutStyles } from './stylesheets';
+import { TextStyles, LayoutStyles } from '../style/stylesheets';
 
 export const EmptyFieldError = ({ field }) => {
   return (

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Pressable, Text, StyleSheet, View } from "react-native";
-import { TextStyles, LayoutStyles } from './stylesheets';
-import { addRecipe } from '../lib';
-import { RecipesContext } from '../App';
+import { TextStyles, LayoutStyles } from '../style/stylesheets';
+import { addRecipe } from '../../lib';
+import { RecipesContext } from '../../App';
 import { DuplicateNameError } from './errors';
 
 const ButtonStyles = StyleSheet.create({

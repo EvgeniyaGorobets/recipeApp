@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { TextStyles, LayoutStyles, BorderStyles, FormStyles } from './stylesheets';
-import { EmptyFieldError, NumericError } from './errors';
+import { TextStyles, LayoutStyles, BorderStyles, FormStyles } from '../style/stylesheets';
+import { EmptyFieldError, NumericError } from '../generic/errors';
 
 const YieldStyles = StyleSheet.create({
   label: {
-    width: '60%'
+    width: '50%',
+    flexGrow: 1
   },
   amount: {
     width: '20%'
@@ -24,30 +25,28 @@ const YieldLabel = () => {
 const YieldAmount = ({ recipeYield, setYield, showErrors }) => {
   const amountEmptyError = (recipeYield.amount == "");
   const amountNaNError = isNaN(+recipeYield.amount);
-  const errorBorder = 
+  const errorBorder =
     (showErrors && (amountNaNError || amountEmptyError) ? FormStyles.errorInput : null);
-  
+
   return (
     <TextInput
       onChangeText={number => setYield({ ...recipeYield, amount: number })}
       defaultValue={recipeYield.amount}
       keyboardType="numeric"
       placeholder="Amount"
-      style={[TextStyles.paragraph, YieldStyles.amount, FormStyles.textInput,errorBorder]}
+      style={[TextStyles.paragraph, YieldStyles.amount, FormStyles.textInput, errorBorder]}
     />
   )
 }
 
 export const RecipeYield = ({ recipeYield, setYield }) => {
   return (
-    <>
-      <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
-        <YieldLabel />
-        <YieldAmount recipeYield={recipeYield} setYield={setYield} />
-        <Text style={[TextStyles.paragraph, YieldStyles.units]}>{recipeYield.units}</Text>
-      </View>
+    <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
+      <YieldLabel />
+      <YieldAmount recipeYield={recipeYield} setYield={setYield} />
+      <Text style={[TextStyles.paragraph, YieldStyles.units]}>{recipeYield.units}</Text>
       {isNaN(+recipeYield.amount) && <NumericError field="Yield amount" />}
-    </>
+    </View>
   )
 }
 
@@ -58,23 +57,21 @@ export const EditYield = ({ recipeYield, setYield, showErrors }) => {
   const unitsBorder = (unitEmptyError && showErrors) ? FormStyles.errorInput : null;
 
   return (
-    <>
-      <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
-        <YieldLabel />
-        <YieldAmount 
-          recipeYield={recipeYield} 
-          setYield={setYield}
-          showErrors={showErrors} />
-        <TextInput
-          onChangeText={text => setYield({ ...recipeYield, units: text })}
-          defaultValue={recipeYield.units}
-          placeholder="Units"
-          style={[TextStyles.paragraph, YieldStyles.units, FormStyles.textInput, unitsBorder]}
-        />
-      </View>
+    <View style={[LayoutStyles.row, BorderStyles.yieldRow]}>
+      <YieldLabel />
+      <YieldAmount
+        recipeYield={recipeYield}
+        setYield={setYield}
+        showErrors={showErrors} />
+      <TextInput
+        onChangeText={text => setYield({ ...recipeYield, units: text })}
+        defaultValue={recipeYield.units}
+        placeholder="Units"
+        style={[TextStyles.paragraph, YieldStyles.units, FormStyles.textInput, unitsBorder]}
+      />
       {showErrors && amountNaNError && <NumericError field="Yield amount" />}
       {showErrors && amountEmptyError && <EmptyFieldError field="Yield amount" />}
       {showErrors && unitEmptyError && <EmptyFieldError field="Yield units" />}
-    </>
+    </View>
   )
 }

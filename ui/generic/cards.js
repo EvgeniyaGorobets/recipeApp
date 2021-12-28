@@ -1,8 +1,6 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from "react-native";
-import { addIngredient } from '../lib';
-import { PlusIcon } from './icons';
-import { BorderStyles } from './stylesheets';
+import { PlusIcon } from '../style/icons';
 
 const CardStyle = StyleSheet.create({
   container: {

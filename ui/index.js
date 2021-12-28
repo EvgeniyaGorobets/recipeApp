@@ -1,10 +1,10 @@
-import { EditIngredientList } from "./editIngredient";
-import { IngredientList } from "./ingredientList";
-import { RecipeYield, EditYield } from "./recipeYield";
-import { RecipeName, EditRecipeName } from "./recipeName";
-import { EditButton, SaveButton } from "./buttons";
-import { LayoutStyles } from "./stylesheets";
-import { RecipeCard, AddRecipeCard } from "./cards";
+import { RecipeName, EditRecipeName } from "./recipes/recipeName";
+import { RecipeYield, EditYield } from "./recipes/recipeYield";
+import IngredientList from "./ingredients/IngredientList";
+import EditIngredientList from "./ingredients/EditIngredientList";
+import { EditButton, SaveButton } from "./generic/buttons";
+import { LayoutStyles } from "./style/stylesheets";
+import { RecipeCard, AddRecipeCard } from "./generic/cards";
 
 export { EditIngredientList, IngredientList, EditButton, SaveButton,
   RecipeYield, EditYield, RecipeName, EditRecipeName, 
