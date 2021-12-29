@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pressable, Text, StyleSheet } from "react-native";
+import { RecipesContext } from '../../App';
 import { PlusIcon } from '../style/icons';
+import { addRecipe } from '../../lib';
 
 const CardStyle = StyleSheet.create({
   container: {
@@ -28,9 +30,14 @@ export const RecipeCard = ({ recipeName, navigate }) => {
 }
 
 export const AddRecipeCard = ({ navigate }) => {
+  const { recipes, setRecipes } = useContext(RecipesContext);
+
   return (
     <Pressable
-      onPress={() => {navigate('EditRecipe', { recipe: "" })}}
+      onPress={() => {
+        setRecipes(addRecipe(recipes));
+        navigate('EditRecipe', { recipe: "" })
+      }}
       style={CardStyle.container}>
       <PlusIcon iconSize={32} />
     </Pressable>

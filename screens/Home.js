@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import { RecipesContext } from '../App';
 import { LayoutStyles, RecipeCard, AddRecipeCard } from '../ui';
 
 const Home = ({ navigation }) => {
-  const {recipes, updateRecipes} = useContext(RecipesContext)
+  const {recipes, setRecipes} = useContext(RecipesContext)
 
   return (
     <View style={LayoutStyles.screen}>

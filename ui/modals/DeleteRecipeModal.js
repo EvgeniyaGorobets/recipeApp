@@ -6,10 +6,10 @@ import { RecipesContext } from '../../App';
 import { deleteRecipe } from "../../lib";
 
 const DeleteRecipeModal = ({visible, setVisible, recipeName, navigate}) => {
-  const {recipes, updateRecipes} = useContext(RecipesContext);
+  const {recipes, setRecipes} = useContext(RecipesContext);
 
   const yesDelete = () => {
-    updateRecipes(deleteRecipe(recipes, recipeName));
+    setRecipes(deleteRecipe(recipes, recipeName));
     setVisible(false);
     navigate('Home'); 
   }
@@ -42,13 +42,15 @@ const DeleteRecipeModal = ({visible, setVisible, recipeName, navigate}) => {
 
 
 const ModalStyles = StyleSheet.create({
-  container: { //this positions the modal on the page
+  //this positions the modal on the page
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
-  modal: { // this is styling for the modal itself
+  // this is styling for the modal itself
+  modal: {
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
@@ -62,16 +64,6 @@ const ModalStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
   }
 });
 

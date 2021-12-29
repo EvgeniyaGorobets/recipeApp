@@ -3,11 +3,10 @@ import { View } from "react-native";
 import { RecipesContext } from '../App';
 import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList, 
   DeleteRecipeButton, DeleteRecipeModal } from '../ui';
-import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {
-  const {recipes, updateRecipes} = useContext(RecipesContext);
-  const recipe = route.params.recipe ? recipes[route.params.recipe] : newRecipe();
+  const {recipes, setRecipes} = useContext(RecipesContext);
+  const recipe = recipes[route.params.recipe];
   const initialName = recipe.name;
 
   const [recipeName, setName] = useState(recipe.name);

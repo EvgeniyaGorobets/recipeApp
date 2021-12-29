@@ -4,7 +4,7 @@ import { RecipesContext } from '../App';
 import { RecipeYield, IngredientList, RecipeName, EditButton, LayoutStyles } from '../ui';
 
 const ViewRecipe = ({ navigation, route }) => {
-  const { recipes, updateRecipes } = useContext(RecipesContext);
+  const { recipes, setRecipes } = useContext(RecipesContext);
   const recipe = recipes[route.params.recipe]
   const [recipeYield, setYield] = useState(recipe.yield);
 

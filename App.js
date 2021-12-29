@@ -7,7 +7,6 @@ import { getRecipes, saveRecipes } from './lib';
 
 // Next Steps:
 // 1) Consider more refactoring (maybe look at examples)
-// 2) Add delete recipe button and general recipe functions (change how addrecipe works)
 // 3) Add input checks so that numbers have only 3 digits after decimal
 // 4) add cups/tsp conversions
 // 5) move context somewhere else
@@ -17,7 +16,7 @@ import { getRecipes, saveRecipes } from './lib';
 const Stack = createNativeStackNavigator();
 export const RecipesContext = React.createContext({
   recipes: {},
-  updateRecipes: () => {}
+  setRecipes: () => {}
 });
 
 export default function App() {
@@ -32,14 +31,14 @@ export default function App() {
       const storedRecipes = await getRecipes();
       setRecipes(storedRecipes);
     }
-    fetchRecipes()
+    fetchRecipes();
   }, [])
   // empty dependency array indicates that this effect never needs to be rerun
 
   // wrapping navigator in context provider is the recommended way to pass props
   // https://reactnavigation.org/docs/hello-react-navigation/#passing-additional-props
   return (
-    <RecipesContext.Provider value={{recipes, updateRecipes}}>
+    <RecipesContext.Provider value={{recipes: recipes, setRecipes: updateRecipes}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} options={{ title: "Alexey's Recipe App" }}/>
@@ -50,12 +49,3 @@ export default function App() {
     </RecipesContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

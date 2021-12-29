@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Pressable, Text, StyleSheet, View } from "react-native";
 import { TextStyles, LayoutStyles, Colors } from '../style/stylesheets';
-import { addRecipe, deleteRecipe } from '../../lib';
+import { updateRecipe, deleteRecipe } from '../../lib';
 import { RecipesContext } from '../../App';
 import { DuplicateNameError } from './errors';
 
@@ -53,13 +53,13 @@ export const EditButton = ({ recipeName, navigate }) => {
 
 export const SaveButton = (props) => {
   const {oldName, newName, recipeYield, ingredients, navigate, showErrors} = props;
-  const {recipes, updateRecipes} = useContext(RecipesContext);
+  const {recipes, setRecipes} = useContext(RecipesContext);
   const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big])
 
   const saveRecipe = () => {
     try {
-      const newRecipes = addRecipe(recipes, oldName, newName, recipeYield, ingredients);
-      updateRecipes(newRecipes);
+      const newRecipes = updateRecipe(recipes, oldName, newName, recipeYield, ingredients);
+      setRecipes(newRecipes);
       navigate('ViewRecipe', { recipe: newName });
     } catch (e) {
       console.log(e);
