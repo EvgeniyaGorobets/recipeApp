@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import { RecipesContext } from '../App';
-import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList, DeleteRecipeButton } from '../ui';
+import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList, 
+  DeleteRecipeButton, DeleteRecipeModal } from '../ui';
 import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {
@@ -13,6 +14,7 @@ const EditRecipe = ({ navigation, route }) => {
   const [recipeYield, setYield] = useState(recipe.yield);
   const [ingredients, setIngr] = useState(recipe.ingredients);
   const [showErrors, setErrorVisibility] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={LayoutStyles.screen}>
@@ -27,7 +29,12 @@ const EditRecipe = ({ navigation, route }) => {
         navigate={navigation.navigate}
         showErrors={setErrorVisibility}
       />
-      <DeleteRecipeButton recipeName={recipeName} navigate={navigation.navigate} />
+      <DeleteRecipeButton openModal={setModalVisible} />
+      <DeleteRecipeModal 
+        visible={modalVisible} 
+        setVisible={setModalVisible} 
+        recipeName={recipeName}
+        navigate={navigation.navigate} />
     </View>
   )
 }

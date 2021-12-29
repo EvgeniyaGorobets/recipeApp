@@ -27,10 +27,6 @@ export const TextStyles = StyleSheet.create({
     fontSize: 12,
     border: 'red'
     // TODO: font style is roboto, add padding
-  },
-  button: {
-    color: 'white',
-    fontSize: 20
   }
 });
 

@@ -5,36 +5,47 @@ import { addRecipe, deleteRecipe } from '../../lib';
 import { RecipesContext } from '../../App';
 import { DuplicateNameError } from './errors';
 
-const ButtonStyles = StyleSheet.create({
-  blue: {
-    color: 'white',
-    backgroundColor: Colors.android.blue, // android blue
+export const ButtonStyles = StyleSheet.create({
+  big: {
     width: '100%',
-    textAlign: 'center',
     padding: '10px',
-    borderRadius: '7px',
-    flexGrow: 1
+    textAlign: 'center',
+    flexGrow: 1,
+    borderRadius: '7px'
   },
-  red: {
+  small: {
+    width: '50%',
+    padding: '5px',
+    textAlign: 'center',
+    borderRadius: '7px'
+  },
+  blueFill: {
+    color: 'white',
+    backgroundColor: Colors.android.blue,
+  },
+  blueOutline: {
+    color: Colors.android.blue,
+    backgroundColor: 'white',
+    borderColor: Colors.android.blue,
+    borderWidth: '3px'
+  },
+  redOutline: {
     color: Colors.android.red,
     backgroundColor: 'white',
     borderColor: Colors.android.red,
-    borderWidth: '3px',
-    width: '100%',
-    textAlign: 'center',
-    padding: '10px',
-    borderRadius: '7px',
-    flexGrow: 1
+    borderWidth: '3px'
   }
 })
 
 export const EditButton = ({ recipeName, navigate }) => {
+  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big])
+
   return (
     <View style={LayoutStyles.row} >
       <Pressable
         onPress={() => { navigate('EditRecipe', { recipe: recipeName }) }}
-        style={ButtonStyles.blue}>
-        <Text style={TextStyles.button}>Edit Recipe</Text>
+        style={style}>
+        <Text style={{fontSize: 20, color: 'white'}}>Edit Recipe</Text>
       </Pressable>
     </View>
   )
@@ -43,6 +54,7 @@ export const EditButton = ({ recipeName, navigate }) => {
 export const SaveButton = (props) => {
   const {oldName, newName, recipeYield, ingredients, navigate, showErrors} = props;
   const {recipes, updateRecipes} = useContext(RecipesContext);
+  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big])
 
   const saveRecipe = () => {
     try {
@@ -62,8 +74,8 @@ export const SaveButton = (props) => {
     <View style={LayoutStyles.row} >
       <Pressable
         onPress={saveRecipe}
-        style={ButtonStyles.blue}>
-        <Text style={TextStyles.button}>Save Recipe</Text>
+        style={style}>
+        <Text style={{fontSize: 20, color: 'white'}}>Save Recipe</Text>
       </Pressable>
     </View>
     </>
@@ -71,22 +83,28 @@ export const SaveButton = (props) => {
 }
 
 
-// TODO: add an "Are you sure?" modal
-export const DeleteRecipeButton = ({ recipeName, navigate }) => {
-  const {recipes, updateRecipes} = useContext(RecipesContext);
-
-  const onPress = () => {
-    updateRecipes(deleteRecipe(recipes, recipeName));
-    navigate('Home'); 
-  }
+export const DeleteRecipeButton = ({ openModal }) => {
+  const style = StyleSheet.flatten([ButtonStyles.redOutline, ButtonStyles.big]);
 
   return (
     <View style={LayoutStyles.row} >
       <Pressable
-        onPress={onPress}
-        style={ButtonStyles.red}>
-        <Text style={[TextStyles.button, {color: Colors.android.red}]}>Delete Recipe</Text>
+        onPress={() => openModal(true)}
+        style={style}>
+        <Text style={{fontSize: 20, color: Colors.android.red}}>Delete Recipe</Text>
       </Pressable>
     </View>
+  )
+}
+
+
+export const ModalButton = ({ text, color, onPress }) => {
+  const buttonColor = (color == Colors.android.red) ? ButtonStyles.redOutline : ButtonStyles.blueOutline;
+  const style = StyleSheet.flatten([buttonColor, ButtonStyles.big, {marginTop: '10px'}]);
+
+  return(
+    <Pressable style={style} onPress={onPress}>
+      <Text style={{fontSize: 16, color: color}}>{text}</Text>
+    </Pressable>
   )
 }
