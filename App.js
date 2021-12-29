@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home, ViewRecipe, EditRecipe } from './screens'
 import { getRecipes, saveRecipes } from './lib';
+import { RecipesContext } from './ui';
 
 // Next Steps:
 // 1) Consider more refactoring (maybe look at examples)
 // 3) Add input checks so that numbers have only 3 digits after decimal
 // 4) add cups/tsp conversions
-// 5) move context somewhere else
 // 6) Notify use when you're close to the memory limit
 // 7) Backups/exports
 
 const Stack = createNativeStackNavigator();
-export const RecipesContext = React.createContext({
-  recipes: {},
-  setRecipes: () => {}
-});
 
 export default function App() {
   const [recipes, setRecipes] = useState({});

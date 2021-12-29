@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { ModalButton } from "../generic/buttons";
 import { LayoutStyles, TextStyles, Colors } from "../style/stylesheets";
-import { RecipesContext } from '../../App';
+import RecipesContext from '../contexts/RecipesContext';
 import { deleteRecipe } from "../../lib";
 
-const DeleteRecipeModal = ({visible, setVisible, recipeName, navigate}) => {
+const DeleteRecipeModal = ({visible, setVisible, recipeName}) => {
   const {recipes, setRecipes} = useContext(RecipesContext);
+  const navigation = useNavigation();
 
   const yesDelete = () => {
     setRecipes(deleteRecipe(recipes, recipeName));
     setVisible(false);
-    navigate('Home'); 
+    navigation.navigate('Home'); 
   }
 
   return (

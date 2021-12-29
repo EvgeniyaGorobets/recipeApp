@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Pressable, Text, StyleSheet, View } from "react-native";
-import { TextStyles, LayoutStyles, Colors } from '../style/stylesheets';
-import { updateRecipe, deleteRecipe } from '../../lib';
-import { RecipesContext } from '../../App';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { LayoutStyles, Colors } from '../style/stylesheets';
+import { updateRecipe } from '../../lib';
+import RecipesContext from '../contexts/RecipesContext';
 import { DuplicateNameError } from './errors';
 
 export const ButtonStyles = StyleSheet.create({
@@ -37,47 +38,65 @@ export const ButtonStyles = StyleSheet.create({
   }
 })
 
-export const EditButton = ({ recipeName, navigate }) => {
-  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big])
+export const EditButton = ({ recipeName }) => {
+  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big]);
+  const navigation = useNavigation();
 
   return (
     <View style={LayoutStyles.row} >
       <Pressable
-        onPress={() => { navigate('EditRecipe', { recipe: recipeName }) }}
+        onPress={() => { navigation.navigate('EditRecipe', { recipe: recipeName }) }}
         style={style}>
-        <Text style={{fontSize: 20, color: 'white'}}>Edit Recipe</Text>
+        <Text style={{ fontSize: 20, color: 'white' }}>Edit Recipe</Text>
       </Pressable>
     </View>
   )
 }
 
 export const SaveButton = (props) => {
-  const {oldName, newName, recipeYield, ingredients, navigate, showErrors} = props;
-  const {recipes, setRecipes} = useContext(RecipesContext);
-  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big])
+  const { oldName, newName, recipeYield, ingredients, showErrors } = props;
+  const { recipes, setRecipes } = useContext(RecipesContext);
+  const navigation = useNavigation();
+  const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big]);
 
   const saveRecipe = () => {
     try {
       const newRecipes = updateRecipe(recipes, oldName, newName, recipeYield, ingredients);
       setRecipes(newRecipes);
-      navigate('ViewRecipe', { recipe: newName });
+
+      // If this is a new recipe, then the user never entered the "View Recipe" screen
+      //
+      // navigate() will keep the "Edit Recipe" screen in the navigation stack, which will cause errors
+      // because the route params will stay the same even after the context has changed, and imo it 
+      // doesn't make sense for the back button to take you to the edit screen after you've saved
+      //
+      // replace() will removed "Edit Screen" from the stack, taking care of errors related to 
+      // outdates params, and ensuring that the back button on "View Recipe" still takes user to Home
+      if (oldName == "") {
+
+        navigation.dispatch(
+          StackActions.replace('ViewRecipe', { recipe: newName })
+        );
+      } else {
+        navigation.navigate('ViewRecipe', { recipe: newName });
+      }
     } catch (e) {
       console.log(e);
       showErrors(true);
     }
-    
+
   }
 
   return (
     <>
-    {(oldName != newName) && (newName in recipes) && <DuplicateNameError name={newName}/> }
-    <View style={LayoutStyles.row} >
-      <Pressable
-        onPress={saveRecipe}
-        style={style}>
-        <Text style={{fontSize: 20, color: 'white'}}>Save Recipe</Text>
-      </Pressable>
-    </View>
+      {(oldName != newName) && (newName in recipes) && <DuplicateNameError name={newName} />}
+      <View style={LayoutStyles.row} >
+        <Pressable
+          onPress={saveRecipe}
+          style={style}>
+          <Text style={{ fontSize: 20, color: 'white' }}>Save Recipe</Text>
+        </Pressable>
+      </View>
     </>
   )
 }
@@ -91,7 +110,7 @@ export const DeleteRecipeButton = ({ openModal }) => {
       <Pressable
         onPress={() => openModal(true)}
         style={style}>
-        <Text style={{fontSize: 20, color: Colors.android.red}}>Delete Recipe</Text>
+        <Text style={{ fontSize: 20, color: Colors.android.red }}>Delete Recipe</Text>
       </Pressable>
     </View>
   )
@@ -100,11 +119,11 @@ export const DeleteRecipeButton = ({ openModal }) => {
 
 export const ModalButton = ({ text, color, onPress }) => {
   const buttonColor = (color == Colors.android.red) ? ButtonStyles.redOutline : ButtonStyles.blueOutline;
-  const style = StyleSheet.flatten([buttonColor, ButtonStyles.big, {marginTop: '10px'}]);
+  const style = StyleSheet.flatten([buttonColor, ButtonStyles.big, { marginTop: '10px' }]);
 
-  return(
+  return (
     <Pressable style={style} onPress={onPress}>
-      <Text style={{fontSize: 16, color: color}}>{text}</Text>
+      <Text style={{ fontSize: 16, color: color }}>{text}</Text>
     </Pressable>
   )
 }
