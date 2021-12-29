@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import { RecipesContext } from '../App';
-import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList } from '../ui';
+import { EditRecipeName, EditYield, LayoutStyles, SaveButton, EditIngredientList, DeleteRecipeButton } from '../ui';
 import { newRecipe } from '../lib';
 
 const EditRecipe = ({ navigation, route }) => {
@@ -27,6 +27,7 @@ const EditRecipe = ({ navigation, route }) => {
         navigate={navigation.navigate}
         showErrors={setErrorVisibility}
       />
+      <DeleteRecipeButton recipeName={recipeName} navigate={navigation.navigate} />
     </View>
   )
 }

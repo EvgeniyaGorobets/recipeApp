@@ -1,5 +1,12 @@
 import { StyleSheet } from "react-native";
 
+export const Colors = {
+  android: {
+    blue: '#2f80ed',
+    red: '#eb5757'
+  }
+}
+
 export const TextStyles = StyleSheet.create({
   paragraph: {
     color: 'black',
@@ -15,7 +22,7 @@ export const TextStyles = StyleSheet.create({
     // TODO: font style is roboto, add padding
   },
   error: {
-    color: 'red',
+    color: Colors.android.red,
     backgroundColor: 'white',
     fontSize: 12,
     border: 'red'
@@ -59,13 +66,15 @@ export const BorderStyles = StyleSheet.create({
   }
 })
 
+
+// move this elsewhere when you create a forms folder
 export const FormStyles = StyleSheet.create({
   textInput: {
     marginLeft: '2px',
     marginRight: '2px'
   },
   errorInput: {
-    borderBottomColor: 'red',
+    borderBottomColor: Colors.android.red,
     borderBottomWidth: '2px'
   }
 })
