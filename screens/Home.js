@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { View } from "react-native";
-import { LayoutStyles, RecipeCard, AddRecipeCard, RecipesContext } from '../ui';
+import { LayoutStyles, SearchBar, RecipeCard, AddRecipeCard, RecipesContext } from '../ui';
 
 const Home = () => {
   const {recipes, setRecipes} = useContext(RecipesContext)
 
   return (
     <View style={LayoutStyles.screen}>
+      <SearchBar />
       {recipes ?
         Object.keys(recipes)
           .sort((a, b) => {return a.toUpperCase().localeCompare(b.toUpperCase())})

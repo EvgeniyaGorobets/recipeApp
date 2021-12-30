@@ -7,7 +7,9 @@ import { LayoutStyles } from "./style/stylesheets";
 import { RecipeCard, AddRecipeCard } from "./generic/cards";
 import DeleteRecipeModal from "./modals/DeleteRecipeModal";
 import RecipesContext from "./contexts/RecipesContext";
+import SearchBar from "./SearchBar";
 
 export { EditIngredientList, IngredientList, EditButton, SaveButton,
   RecipeYield, EditYield, RecipeName, EditRecipeName, DeleteRecipeModal, 
-  RecipeCard, AddRecipeCard, DeleteRecipeButton, RecipesContext, LayoutStyles };
+  RecipeCard, AddRecipeCard, DeleteRecipeButton, SearchBar, 
+  RecipesContext, LayoutStyles };
