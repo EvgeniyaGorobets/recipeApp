@@ -36,7 +36,10 @@ export default function App() {
     <RecipesContext.Provider value={{recipes: recipes, setRecipes: updateRecipes}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} options={{ title: "Alexey's Recipe App" }}/>
+          <Stack.Screen 
+            name="Home" 
+            component={Home} 
+            options={{ title: "Alexey's Recipe App", headerTitleAlign: 'center' }}/>
           <Stack.Screen name="ViewRecipe" component={ViewRecipe} options={{ title: 'View Recipe' }} />
           <Stack.Screen name="EditRecipe" component={EditRecipe} options={{ title: 'Edit Recipe' }} />
         </Stack.Navigator>
