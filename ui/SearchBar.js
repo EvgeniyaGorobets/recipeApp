@@ -1,10 +1,22 @@
-import React, { useState } from "react";
-import { View, Pressable, TextInput } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, TextInput } from "react-native";
 import { LayoutStyles, TextStyles, FormStyles } from "./style/stylesheets";
 import { SearchIcon } from "./style/icons";
+import { RecipesContext } from ".";
+import { getMatchingRecipes } from '../lib';
 
-const SearchBar = () => {
-  const [text, setText] = useState('');
+const SearchBar = ({ setResults }) => {
+  const { recipes, setRecipes } = useContext(RecipesContext);
+
+  // need to use a side effect so that results will update when recipes load
+  useEffect(() => {
+    setResults(Object.keys(recipes))
+  }, [recipes]);
+
+  const updateSearch = ( searchQuery ) => {
+    const newResults = getMatchingRecipes(recipes, searchQuery);
+    setResults(newResults);
+  }
 
   return (
     <View style={LayoutStyles.row}>
@@ -13,8 +25,7 @@ const SearchBar = () => {
         onChangeText={number => setYield({ ...recipeYield, amount: number })}
         placeholder="Search by recipe title"
         style={[TextStyles.paragraph, FormStyles.textInput, {fontSize: 16}]}
-        value={text}
-        onChangeText={newText => setText(newText)}
+        onChangeText={text => updateSearch(text)}
       />
     </View>
   )
