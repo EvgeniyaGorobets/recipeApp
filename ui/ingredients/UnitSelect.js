@@ -13,7 +13,8 @@ const unitOptions = [
   { value: 'mL' },
   { value: 'L' },
   { value: 'grams' },
-  { value: 'kg' }
+  { value: 'kg' },
+  { value: 'units'}
 ]
 
 const UnitSelect = ({ units, setUnits }) => {
