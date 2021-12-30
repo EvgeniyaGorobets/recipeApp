@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { Pressable, Text, StyleSheet } from "react-native";
+import { View, Pressable, Text, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import RecipesContext from '../contexts/RecipesContext';
+import RecipesContext from '../RecipesContext';
 import { PlusIcon } from '../style/icons';
+import { LayoutStyles } from '..';
 import { addRecipe } from '../../lib';
 
 const CardStyle = StyleSheet.create({
@@ -11,7 +12,9 @@ const CardStyle = StyleSheet.create({
     padding: '5px',
     filter: 'drop-shadow(0px 1px 1px rgba(38, 50, 56, 0.2))',
     borderRadius: '7px',
-    marginBottom: '5px'
+    marginBottom: '5px',
+    marginTop: '5px',
+    width: '100%'
   },
   text: {
     color: 'black',
@@ -24,11 +27,13 @@ export const RecipeCard = ({ recipeName }) => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
-      onPress={() => {navigation.navigate('ViewRecipe', { recipe: recipeName })}}
-      style={CardStyle.container}>
-      <Text style={CardStyle.text}>{recipeName}</Text>
-    </Pressable>
+    <View style={LayoutStyles.row}>
+      <Pressable
+        onPress={() => { navigation.navigate('ViewRecipe', { recipe: recipeName }) }}
+        style={CardStyle.container}>
+        <Text style={CardStyle.text}>{recipeName}</Text>
+      </Pressable>
+    </View>
   )
 }
 
@@ -37,13 +42,15 @@ export const AddRecipeCard = () => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
-      onPress={() => {
-        setRecipes(addRecipe(recipes));
-        navigation.navigate('EditRecipe', { recipe: "" })
-      }}
-      style={CardStyle.container}>
-      <PlusIcon iconSize={32} />
-    </Pressable>
+    <View style={LayoutStyles.row}>
+      <Pressable
+        onPress={() => {
+          setRecipes(addRecipe(recipes));
+          navigation.navigate('EditRecipe', { recipe: "" })
+        }}
+        style={CardStyle.container}>
+        <PlusIcon iconSize={32} />
+      </Pressable>
+    </View>
   )
 }

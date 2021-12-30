@@ -11,19 +11,21 @@ const EditRecipe = ({ route }) => {
   const [recipeYield, setYield] = useState(recipe.yield);
   const [ingredients, setIngr] = useState(recipe.ingredients);
   const [showErrors, setErrorVisibility] = useState(false);
+  const [errors, setErrors] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={LayoutStyles.screen}>
-      <EditRecipeName name={recipeName} setName={setName} showErrors={showErrors} />
-      <EditYield recipeYield={recipeYield} setYield={setYield} showErrors={showErrors} />
-      <EditIngredientList ingredients={ingredients} setIngredients={setIngr} showErrors={showErrors} />
+      <EditRecipeName name={recipeName} setName={setName} oldName={route.params.recipe} showErrors={showErrors} setErrors={setErrors} />
+      <EditYield recipeYield={recipeYield} setYield={setYield} showErrors={showErrors} setErrors={setErrors} />
+      <EditIngredientList ingredients={ingredients} setIngredients={setIngr} showErrors={showErrors} setErrors={setErrors} />
       <SaveButton 
         oldName={route.params.recipe} 
         newName={recipeName}
         recipeYield={recipeYield}
         ingredients={ingredients}
         showErrors={setErrorVisibility}
+        errors={errors}
       />
       <DeleteRecipeButton openModal={setModalVisible} />
       <DeleteRecipeModal 

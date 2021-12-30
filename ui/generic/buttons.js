@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Pressable, Text, StyleSheet, View } from "react-native";
+import { Pressable, Text, StyleSheet, View, Alert } from "react-native";
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { LayoutStyles, Colors } from '../style/stylesheets';
 import { updateRecipe } from '../../lib';
-import RecipesContext from '../contexts/RecipesContext';
+import RecipesContext from '../RecipesContext';
 import { DuplicateNameError } from './errors';
 
 export const ButtonStyles = StyleSheet.create({
@@ -54,13 +54,13 @@ export const EditButton = ({ recipeName }) => {
 }
 
 export const SaveButton = (props) => {
-  const { oldName, newName, recipeYield, ingredients, showErrors } = props;
+  const { oldName, newName, recipeYield, ingredients, showErrors, errors } = props;
   const { recipes, setRecipes } = useContext(RecipesContext);
   const navigation = useNavigation();
   const style = StyleSheet.flatten([ButtonStyles.blueFill, ButtonStyles.big]);
-
+  
   const saveRecipe = () => {
-    try {
+    if (!errors) {
       const newRecipes = updateRecipe(recipes, oldName, newName, recipeYield, ingredients);
       setRecipes(newRecipes);
 
@@ -73,23 +73,20 @@ export const SaveButton = (props) => {
       // replace() will removed "Edit Screen" from the stack, taking care of errors related to 
       // outdates params, and ensuring that the back button on "View Recipe" still takes user to Home
       if (oldName == "") {
-
         navigation.dispatch(
           StackActions.replace('ViewRecipe', { recipe: newName })
         );
       } else {
         navigation.navigate('ViewRecipe', { recipe: newName });
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      //<Alert></Alert>
       showErrors(true);
     }
 
   }
 
   return (
-    <>
-      {(oldName != newName) && (newName in recipes) && <DuplicateNameError name={newName} />}
       <View style={LayoutStyles.row} >
         <Pressable
           onPress={saveRecipe}
@@ -97,7 +94,6 @@ export const SaveButton = (props) => {
           <Text style={{ fontSize: 20, color: 'white' }}>Save Recipe</Text>
         </Pressable>
       </View>
-    </>
   )
 }
 

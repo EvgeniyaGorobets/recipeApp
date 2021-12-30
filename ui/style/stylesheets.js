@@ -34,14 +34,13 @@ export const LayoutStyles = StyleSheet.create({
   row: {
     width: '100%',
     flexDirection: 'row',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    paddingLeft: '15px',
+    paddingRight: '15px'
   },
   screen: {
     backgroundColor: 'white',
-    height: '100%',
-    padding: '15px'
+    height: '100%'
   },
   errorRow: {
     width: '100%',
@@ -52,7 +51,11 @@ export const LayoutStyles = StyleSheet.create({
 export const BorderStyles = StyleSheet.create({
   ingredientRow: {
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: '1px'
+    borderBottomWidth: '1px',
+    flexDirection: 'row',
+    width: '100%',
+    paddingTop: '5px',
+    paddingBottom: '5px'
   },
   yieldRow: {
     borderBottomColor: 'rgba(0, 0, 0, 0.3)',

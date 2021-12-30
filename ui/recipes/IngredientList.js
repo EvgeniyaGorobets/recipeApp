@@ -2,13 +2,14 @@ import React from 'react';
 import { View, ScrollView, Text } from "react-native";
 import { computeIngrAmounts, formatAmount } from '../../lib';
 import { TextStyles, LayoutStyles, BorderStyles } from '../style/stylesheets';
-import { IngrWidths } from './ingredientStyles';
 
 const IngredientRow = ({ name, amount }) => {
   return (
-    <View style={[LayoutStyles.row, BorderStyles.ingredientRow]}>
-      <Text style={[TextStyles.paragraph, IngrWidths.name]}>{name}</Text>
-      <Text style={[TextStyles.paragraph, IngrWidths.amount]}>{amount}</Text>
+    <View style={LayoutStyles.row}>
+      <View style={BorderStyles.ingredientRow}>
+      <Text style={[TextStyles.paragraph, {width: '70%'}]}>{name}</Text>
+      <Text style={[TextStyles.paragraph, {width: '30%'}]}>{amount}</Text>
+      </View>
     </View>
   )
 }

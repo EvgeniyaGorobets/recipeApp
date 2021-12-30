@@ -1,6 +1,8 @@
-import React from 'react';
-import { Text, TextInput, View } from 'react-native';
-import { EmptyFieldError } from '../generic/errors';
+import React, { useContext } from 'react';
+import { Text, View } from 'react-native';
+import RecipesContext from '../RecipesContext';
+import { SafeTextInput } from '../forms';
+import { EmptyFieldError, DuplicateNameError } from '../generic/errors';
 import { TextStyles, LayoutStyles, FormStyles } from '../style/stylesheets';
 
 export const RecipeName = ({ name }) => {
@@ -11,19 +13,24 @@ export const RecipeName = ({ name }) => {
   )
 }
 
-export const EditRecipeName = ({ name, setName, showErrors }) => {
-  const nameError = (name == "");
-  const errorBorder = (nameError && showErrors) ? FormStyles.errorInput : null;
+export const EditRecipeName = ({ name, setName, oldName, showErrors, setErrors }) => {
+  const {recipes, setRecipes} = useContext(RecipesContext);
+  const updateName = (newName) => {
+    setName(newName);
+    setErrors(newName == "" || (oldName != newName && newName in recipes));
+  }
 
   return (
-      <View style={[LayoutStyles.row, errorBorder]}>
-        <TextInput
-          placeholder="Recipe Name"
-          onChangeText={text => setName(text)}
-          defaultValue={name}
-          style={TextStyles.title}
-        />
-        {showErrors && nameError && <EmptyFieldError field="Recipe name" />}
-      </View>
+    <View style={LayoutStyles.row}>
+      <SafeTextInput
+        value={name}
+        setValue={updateName}
+        placeholder="Recipe Name"
+        showErrors={showErrors}
+        style={TextStyles.title}
+      />
+      {showErrors && name == "" && <EmptyFieldError field="Recipe name" />}
+      {showErrors && (oldName != name && name in recipes) && <DuplicateNameError name={name} />}
+    </View>
   )
 }

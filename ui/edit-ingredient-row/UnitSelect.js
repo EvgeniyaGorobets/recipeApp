@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import { TextStyles, FormStyles } from '../style/stylesheets';
-import { EditIngrWidths } from './ingredientStyles';
 
-const unitStyle = StyleSheet.flatten([TextStyles.paragraph, FormStyles.textInput, EditIngrWidths.units])
+const unitStyle = StyleSheet.flatten([TextStyles.paragraph, FormStyles.textInput, {width: '20%'}])
 
 const unitOptions = [
   { value: 'cups' },
