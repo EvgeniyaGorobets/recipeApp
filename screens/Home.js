@@ -8,9 +8,10 @@ const Home = () => {
   return (
     <View style={LayoutStyles.screen}>
       {recipes ?
-        Object.keys(recipes).map(recipe => {
-          return (<RecipeCard recipeName={recipe} key={recipe} />);
-        }) : null //<Text>Loading Recipes... (but what if there are no recipes?)</Text>
+        Object.keys(recipes)
+          .sort((a, b) => {return a.toUpperCase().localeCompare(b.toUpperCase())})
+          .map(recipe => {return (<RecipeCard recipeName={recipe} key={recipe} />)}) 
+          : null
       }
       <AddRecipeCard />
     </View>
