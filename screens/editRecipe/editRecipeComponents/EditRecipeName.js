@@ -8,7 +8,9 @@ const EditRecipeName = ({ name, setName, oldName, showErrors, setErrors }) => {
   const updateName = (newName) => {
     setName(newName);
     const errors = checkRecipeName(recipes, newName, oldName);
-    console.log("Recipe name errors: ", errors);
+    if (errors.length > 0) { 
+      console.log("Recipe name errors: ", errors);
+    }
     setErrors(errors.length > 0);
   }
 

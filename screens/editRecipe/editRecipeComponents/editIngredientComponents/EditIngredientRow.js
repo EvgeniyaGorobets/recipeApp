@@ -9,7 +9,9 @@ const EditIngredientRow = ({ ingredients, index, setIngredients, showErrors, set
     const newIngredients = updateIngredient(ingredients, index, property, value);
     setIngredients(newIngredients);
     const errors = checkIngredient(newIngredients[index]);
-    console.log("Ingredient errors: ", errors);
+    if (errors.length > 0) { 
+      console.log("Ingredient errors: ", errors);
+    }
     setErrors(errors.length > 0);
   }
 

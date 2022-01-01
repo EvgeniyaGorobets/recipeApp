@@ -10,30 +10,32 @@ const ErrorRow = ({ text }) => {
   )
 }
 
-export const EmptyFieldError = ({ field }) => {
+const EmptyFieldError = ({ field }) => {
   return (<ErrorRow text={field + " cannot be empty."} />);
 }
 
-export const NumericError = ({ field }) => {
+const NumericError = ({ field }) => {
   return (<ErrorRow text={field + " must be a number."} />);
 }
 
-export const DuplicateNameError = ({ name }) => {
+const DuplicateNameError = ({ name }) => {
   return (<ErrorRow text={"A recipe called '" + name + "' already exists."} />);
 }
 
-export const ErrorView = ({ errors }) => {
+const ErrorView = ({ errors }) => {
   return (
     <View>
       {errors.map(error => {
         if (error.errorType == "EmptyFieldError") {
-          return(<EmptyFieldError field={error.field} key={0} />)
+          return (<EmptyFieldError field={error.field} key={0} />)
         } else if (error.errorType == "NumericError") {
-          return(<NumericError field={error.field} key={1} />)
+          return (<NumericError field={error.field} key={1} />)
         } else if (error.errorType == "DuplicateNameError") {
-          return(<DuplicateNameError name={error.name} key={2} />)
+          return (<DuplicateNameError name={error.name} key={2} />)
         }
       })}
     </View>
   )
 }
+
+export default ErrorView;

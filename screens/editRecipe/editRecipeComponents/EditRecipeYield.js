@@ -7,7 +7,9 @@ const EditRecipeYield = ({ recipeYield, setYield, showErrors, setErrors }) => {
     const newYield = { ...recipeYield, [property]: value };
     setYield(newYield);
     const errors = checkRecipeYield(newYield);
-    console.log("Recipe yield errors: ", errors);
+    if (errors.length > 0) { 
+      console.log("Recipe yield errors: ", errors);
+    }
     setErrors(errors.length > 0);
   }
 
