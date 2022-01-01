@@ -11,7 +11,7 @@ const SafeTextInput = ({ value, setValue, placeholder, showErrors, style }) => {
     <TextInput
       placeholder={placeholder}
       onChangeText={text => setValue(text)}
-      defaultValue={value}
+      value={value}
       style={[inputStyle, style, errorBorder]}
     />
   )

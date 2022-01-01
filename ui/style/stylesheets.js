@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 export const Colors = {
   android: {
     blue: '#2f80ed',
-    red: '#eb5757'
+    red: '#eb5757',
+    gray: 'rgb(216, 216, 216)'
   }
 }
 
@@ -24,7 +25,7 @@ export const TextStyles = StyleSheet.create({
   error: {
     color: Colors.android.red,
     backgroundColor: 'white',
-    fontSize: 12,
+    fontSize: 14,
     border: 'red'
     // TODO: font style is roboto, add padding
   }
@@ -45,28 +46,13 @@ export const LayoutStyles = StyleSheet.create({
   errorRow: {
     width: '100%',
     paddingTop: '5px'
+  },
+  list: {
+    paddingLeft: '15px',
+    paddingRight: '15px'
   }
 });
 
-export const BorderStyles = StyleSheet.create({
-  ingredientRow: {
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: '1px',
-    flexDirection: 'row',
-    width: '100%',
-    paddingTop: '5px',
-    paddingBottom: '5px'
-  },
-  yieldRow: {
-    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
-    borderBottomWidth: '1px',
-    borderTopColor: 'rgba(0, 0, 0, 0.3)',
-    borderTopWidth: '1px'
-  }
-})
-
-
-// move this elsewhere when you create a forms folder
 export const FormStyles = StyleSheet.create({
   textInput: {
     marginLeft: '2px',
@@ -77,3 +63,41 @@ export const FormStyles = StyleSheet.create({
     borderBottomWidth: '2px'
   }
 })
+
+export const ButtonStyles = StyleSheet.create({
+  container: {
+    padding: '15px',
+    borderTopWidth: '1px',
+    borderTopColor: Colors.android.gray
+  },
+  big: {
+    width: '100%',
+    padding: '10px',
+    textAlign: 'center',
+    flexGrow: 1,
+    borderRadius: '7px'
+  },
+  small: {
+    width: '50%',
+    padding: '5px',
+    textAlign: 'center',
+    borderRadius: '7px'
+  },
+  blueFill: {
+    color: 'white',
+    backgroundColor: Colors.android.blue,
+  },
+  blueOutline: {
+    color: Colors.android.blue,
+    backgroundColor: 'white',
+    borderColor: Colors.android.blue,
+    borderWidth: '3px'
+  },
+  redOutline: {
+    color: Colors.android.red,
+    backgroundColor: 'white',
+    borderColor: Colors.android.red,
+    borderWidth: '3px'
+  }
+})
+

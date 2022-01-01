@@ -1,27 +1,33 @@
 import React from 'react';
-import { View, ScrollView, Text } from "react-native";
-import { computeIngrAmounts, formatAmount } from '../../lib';
-import { TextStyles, LayoutStyles, BorderStyles } from '../style/stylesheets';
+import { View, ScrollView, StyleSheet } from "react-native";
+import { Colors } from '../style/stylesheets';
 
-const IngredientRow = ({ name, amount }) => {
+export const IngredientStyles = StyleSheet.create({
+  list: {
+    paddingLeft: '15px',
+    paddingRight: '15px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    flexGrow: 1
+  },
+  row: {
+    borderBottomColor: Colors.android.gray,
+    borderBottomWidth: '1px',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    paddingTop: '5px',
+    paddingBottom: '5px'
+  }
+})
+
+// ingredients is an array of arrays, each second-tier array represents a row and
+// contains the component to render
+const IngredientList = ({ ingredients }) => {
   return (
-    <View style={LayoutStyles.row}>
-      <View style={BorderStyles.ingredientRow}>
-      <Text style={[TextStyles.paragraph, {width: '70%'}]}>{name}</Text>
-      <Text style={[TextStyles.paragraph, {width: '30%'}]}>{amount}</Text>
-      </View>
-    </View>
-  )
-}
-
-const IngredientList = ({ ingredients, baseYield, newYield }) => {
-  const ingrList = computeIngrAmounts(ingredients, baseYield, newYield);
-
-  return(
-    <ScrollView style={{flexGrow: 1}}>
-      {ingrList.map((ingredient, index) => {
-        const amount = formatAmount(ingredient.amount, ingredient.units);
-        return (<IngredientRow name={ingredient.name} amount={amount} key={index} />);
+    <ScrollView style={IngredientStyles.list}>
+      {ingredients.map((ingredient, index) => {
+        return (<View style={IngredientStyles.row} key={index}>{ingredient}</View>);
       })}
     </ScrollView>
   )

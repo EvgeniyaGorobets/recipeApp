@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { ModalButton } from "../generic/buttons";
+import { ModalButton } from "../buttons";
 import { LayoutStyles, TextStyles, Colors } from "../style/stylesheets";
 import RecipesContext from '../RecipesContext';
 import { deleteRecipe } from "../../lib";
