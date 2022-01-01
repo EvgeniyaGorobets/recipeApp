@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
 import { checkRecipeName } from '../../../lib';
-import { SafeTextInput, RecipesContext, TextStyles, LayoutStyles, ErrorView } from '../../../ui';
+import { SafeTextInput, RecipesContext, ErrorView, RecipeTitleRow } from '../../../ui';
 
 const EditRecipeName = ({ name, setName, oldName, showErrors, setErrors }) => {
   const { recipes, setRecipes } = useContext(RecipesContext);
@@ -14,17 +13,23 @@ const EditRecipeName = ({ name, setName, oldName, showErrors, setErrors }) => {
     setErrors(errors.length > 0);
   }
 
-  return (
-    <View style={LayoutStyles.row}>
-      <SafeTextInput
+  const renderName = (style) => {
+    return (
+      <>
+        <SafeTextInput
         value={name}
         setValue={updateName}
         placeholder="Recipe Name"
         showErrors={showErrors}
-        style={TextStyles.title}
+        style={style}
       />
       {showErrors && <ErrorView errors={checkRecipeName(recipes, name, oldName)} />}
-    </View>
+      </>
+    )
+  }
+
+  return (
+    <RecipeTitleRow renderName={renderName} />
   )
 }
 
