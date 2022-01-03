@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TextStyles, LayoutStyles, Colors } from '../style/stylesheets';
-import { ErrorView, SafeNumberInput } from '..';
+import ErrorView from '../ErrorView';
+import { SafeNumberInput } from '../forms';
 import { checkRecipeYield } from '../../lib';
 
 const YieldStyles = StyleSheet.create({
