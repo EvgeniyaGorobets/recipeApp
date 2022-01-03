@@ -4,16 +4,22 @@ import { Pressable, Text, StyleSheet } from "react-native";
 const CardStyle = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    padding: 5,
-    filter: 'drop-shadow(0px 1px 1px rgba(38, 50, 56, 0.2))',
+    padding: 10,
     borderRadius: 7,
     marginBottom: 5,
     marginTop: 5,
-    width: '100%'
+    width: '98%',
+    elevation: 3,
+    shadowColor: 'black',
+    shadowOffset: {width: 3, height: 3},
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    marginLeft: 2,
+    marginRight: 2
   },
   text: {
     color: 'black',
-    fontSize: 20 // TODO: add roboto
+    fontSize: 22 // TODO: add roboto
   }
 })
 
