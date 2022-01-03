@@ -49,7 +49,9 @@ export const LayoutStyles = StyleSheet.create({
   },
   list: {
     paddingLeft: 15,
-    paddingRight: 15
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingBottom: 5
   }
 });
 
