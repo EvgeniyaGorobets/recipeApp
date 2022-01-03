@@ -11,7 +11,7 @@ const unitOptions = [
   { value: 'tsp' },
   { value: 'mL' },
   { value: 'L' },
-  { value: 'grams' },
+  { value: 'gr' },
   { value: 'kg' },
   { value: 'units'}
 ]
