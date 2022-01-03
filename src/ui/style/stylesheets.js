@@ -26,7 +26,7 @@ export const TextStyles = StyleSheet.create({
     color: Colors.android.red,
     backgroundColor: 'white',
     fontSize: 14,
-    border: 'red'
+    borderColor: 'red'
     // TODO: font style is roboto, add padding
   }
 });
