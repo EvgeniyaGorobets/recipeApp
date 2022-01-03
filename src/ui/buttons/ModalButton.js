@@ -8,7 +8,7 @@ const ModalButton = ({ text, color, onPress }) => {
 
   return (
     <Pressable style={style} onPress={onPress}>
-      <Text style={{ fontSize: 16, color: color }}>{text}</Text>
+      <Text style={{ fontSize: 16, color: color, textAlign: 'center' }}>{text}</Text>
     </Pressable>
   )
 }
