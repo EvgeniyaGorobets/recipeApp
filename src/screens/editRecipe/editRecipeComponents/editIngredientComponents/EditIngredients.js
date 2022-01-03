@@ -31,7 +31,7 @@ const EditIngredients = ({ ingredients, setIngredients, showErrors, setRecipeErr
     // new ingredient is blank and thus should automatically cause errors
     updateErrors(newIngredients.length - 1, true);
   }
-  const addIngrButton = <AddButton onPress={addIngr} />;
+  const addIngrButton = <AddButton onPress={addIngr} style={{width: '100%'}} />;
 
   return (
     <IngredientList ingredients={[...ingredientComponents, addIngrButton]} />

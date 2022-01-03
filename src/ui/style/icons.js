@@ -9,7 +9,7 @@ export const DeleteIcon = ({ iconSize }) => {
     <Ionicons 
       name="md-close" 
       size={iconSize} 
-      color="rgba(0, 0, 0, 0.4)"
+      color={Colors.android.gray}
       style={{margin: 'auto'}} />
   )
 }
