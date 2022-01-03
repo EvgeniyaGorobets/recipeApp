@@ -13,7 +13,7 @@ const CardStyle = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 16 // TODO: add roboto
+    fontSize: 20 // TODO: add roboto
   }
 })
 
