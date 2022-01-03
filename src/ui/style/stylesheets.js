@@ -12,7 +12,7 @@ export const TextStyles = StyleSheet.create({
   paragraph: {
     color: 'black',
     backgroundColor: 'white',
-    fontSize: 16
+    fontSize: 18
     // TODO: get roboto and make it roboto
   },
   title: {
@@ -75,14 +75,12 @@ export const ButtonStyles = StyleSheet.create({
   big: {
     width: '100%',
     padding: 10,
-    textAlign: 'center',
     flexGrow: 1,
     borderRadius: 7
   },
   small: {
     width: '50%',
     padding: 5,
-    textAlign: 'center',
     borderRadius: 7
   },
   blueFill: {

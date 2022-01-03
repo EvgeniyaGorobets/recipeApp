@@ -16,7 +16,7 @@ const SearchBar = ({ onSearch, placeholder }) => {
       <TextInput
         placeholder={placeholder}
         onChangeText={onSearch}
-        style={[TextStyles.paragraph, FormStyles.textInput, {flexGrow: 1, fontSize: 18}]}
+        style={[TextStyles.paragraph, FormStyles.textInput, {flexGrow: 1}]}
       />
     </View>
   )

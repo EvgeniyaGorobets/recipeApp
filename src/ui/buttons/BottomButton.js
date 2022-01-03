@@ -24,7 +24,9 @@ const BottomButton = (props) => {
       <Pressable
         onPress={onPress}
         style={[buttonColor, ButtonStyles.big, buttonStyle]}>
-        <Text style={[{ fontSize: 20, color: textColor, textAlign: 'center' }, textStyle]}>{text}</Text>
+        <Text style={[{ fontSize: 22, color: textColor, textAlign: 'center' }, textStyle]}>
+          {text}
+        </Text>
       </Pressable>
     </View>
   )
