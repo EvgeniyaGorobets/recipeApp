@@ -19,7 +19,8 @@ export const TextStyles = StyleSheet.create({
     color: 'black',
     backgroundColor: 'white',
     fontSize: 24,
-    flexGrow: 1
+    flexGrow: 1,
+    width: '100%'
     // TODO: font style is roboto, add padding
   },
   error: {
