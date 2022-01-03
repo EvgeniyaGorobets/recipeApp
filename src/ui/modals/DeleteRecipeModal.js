@@ -23,7 +23,7 @@ const DeleteRecipeModal = ({visible, setVisible, recipeName}) => {
         visible={visible} >
         <View style={ModalStyles.container}>
           <View style={ModalStyles.modal}>
-            <Text style={[TextStyles.paragraph, {textAlign: 'center', marginBottom: '10px'}]}>
+            <Text style={[TextStyles.paragraph, {textAlign: 'center', marginBottom: 10}]}>
               Are you sure you want to delete your {recipeName} recipe?
             </Text>
             <View style={LayoutStyles.row}>

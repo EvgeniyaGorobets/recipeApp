@@ -5,14 +5,14 @@ import { SearchIcon } from "./style/icons";
 
 const searchBarStyle = StyleSheet.flatten([LayoutStyles.row, { 
   borderBottomColor: 'rgb(216, 216, 216)', 
-  borderBottomWidth: '1px',
-  padding: '10px'
+  borderBottomWidth: 1,
+  padding: 10
 }])
 
 const SearchBar = ({ onSearch, placeholder }) => {
   return (
     <View style={searchBarStyle}>
-      <View style={{width: '10%', marginRight: '10px'}}><SearchIcon iconSize={24} /></View>
+      <View style={{width: '10%', marginRight: 10}}><SearchIcon iconSize={24} /></View>
       <TextInput
         placeholder={placeholder}
         onChangeText={onSearch}

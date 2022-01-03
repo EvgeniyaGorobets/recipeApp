@@ -7,10 +7,10 @@ import { checkRecipeYield } from '../../lib';
 const YieldStyles = StyleSheet.create({
   container: {
     borderBottomColor: Colors.android.gray,
-    borderBottomWidth: '1px',
+    borderBottomWidth: 1,
     borderTopColor: Colors.android.gray,
-    borderTopWidth: '1px',
-    padding: '8px'
+    borderTopWidth: 1,
+    padding: 8
   }, 
   label: {
     width: '40%', 

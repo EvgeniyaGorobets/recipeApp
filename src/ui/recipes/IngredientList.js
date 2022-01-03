@@ -4,20 +4,20 @@ import { Colors } from '../style/stylesheets';
 
 export const IngredientStyles = StyleSheet.create({
   list: {
-    paddingLeft: '15px',
-    paddingRight: '15px',
-    paddingTop: '5px',
-    paddingBottom: '5px',
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
     flexGrow: 1
   },
   row: {
     borderBottomColor: Colors.android.gray,
-    borderBottomWidth: '1px',
+    borderBottomWidth: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    paddingTop: '5px',
-    paddingBottom: '5px'
+    paddingTop: 5,
+    paddingBottom: 5
   }
 })
 

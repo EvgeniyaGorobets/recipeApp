@@ -4,7 +4,7 @@ import { TextStyles, LayoutStyles } from '../style/stylesheets'
 
 const RecipeTitleRow = ({ renderName }) => {
   return (
-    <View style={[LayoutStyles.row, {width: '100%', padding: '10px'}]}>
+    <View style={[LayoutStyles.row, {width: '100%', padding: 10}]}>
       {renderName(TextStyles.title)}
     </View>
   )

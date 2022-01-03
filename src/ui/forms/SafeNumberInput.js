@@ -3,7 +3,7 @@ import { TextInput, StyleSheet } from "react-native";
 import { TextStyles, FormStyles } from '../style/stylesheets';
 
 const inputStyle = StyleSheet.flatten(
-  [TextStyles.paragraph, FormStyles.textInput, {width: '20%', textAlign: 'right', marginRight: '8px'}]
+  [TextStyles.paragraph, FormStyles.textInput, {width: '20%', textAlign: 'right', marginRight: 8}]
 )
 
 const SafeNumberInput = ({ value, setValue, label, showErrors, style }) => {

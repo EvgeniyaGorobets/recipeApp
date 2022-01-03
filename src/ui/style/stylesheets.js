@@ -36,8 +36,8 @@ export const LayoutStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingLeft: '15px',
-    paddingRight: '15px'
+    paddingLeft: 15,
+    paddingRight: 15
   },
   screen: {
     backgroundColor: 'white',
@@ -45,43 +45,43 @@ export const LayoutStyles = StyleSheet.create({
   },
   errorRow: {
     width: '100%',
-    paddingTop: '5px'
+    paddingTop: 5
   },
   list: {
-    paddingLeft: '15px',
-    paddingRight: '15px'
+    paddingLeft: 15,
+    paddingRight: 15
   }
 });
 
 export const FormStyles = StyleSheet.create({
   textInput: {
-    marginLeft: '2px',
-    marginRight: '2px'
+    marginLeft: 2,
+    marginRight: 2
   },
   errorInput: {
     borderBottomColor: Colors.android.red,
-    borderBottomWidth: '2px'
+    borderBottomWidth: 2
   }
 })
 
 export const ButtonStyles = StyleSheet.create({
   container: {
-    padding: '15px',
-    borderTopWidth: '1px',
+    padding: 15,
+    borderTopWidth: 1,
     borderTopColor: Colors.android.gray
   },
   big: {
     width: '100%',
-    padding: '10px',
+    padding: 10,
     textAlign: 'center',
     flexGrow: 1,
-    borderRadius: '7px'
+    borderRadius: 7
   },
   small: {
     width: '50%',
-    padding: '5px',
+    padding: 5,
     textAlign: 'center',
-    borderRadius: '7px'
+    borderRadius: 7
   },
   blueFill: {
     color: 'white',
@@ -91,13 +91,13 @@ export const ButtonStyles = StyleSheet.create({
     color: Colors.android.blue,
     backgroundColor: 'white',
     borderColor: Colors.android.blue,
-    borderWidth: '3px'
+    borderWidth: 3
   },
   redOutline: {
     color: Colors.android.red,
     backgroundColor: 'white',
     borderColor: Colors.android.red,
-    borderWidth: '3px'
+    borderWidth: 3
   }
 })
 

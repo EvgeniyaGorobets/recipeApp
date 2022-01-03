@@ -4,7 +4,7 @@ import { ButtonStyles, Colors } from '../style/stylesheets';
 
 const ModalButton = ({ text, color, onPress }) => {
   const buttonColor = (color == Colors.android.red) ? ButtonStyles.redOutline : ButtonStyles.blueOutline;
-  const style = StyleSheet.flatten([buttonColor, ButtonStyles.big, { marginTop: '10px' }]);
+  const style = StyleSheet.flatten([buttonColor, ButtonStyles.big, { marginTop: 10 }]);
 
   return (
     <Pressable style={style} onPress={onPress}>
