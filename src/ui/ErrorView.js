@@ -27,7 +27,7 @@ const ErrorView = ({ errors }) => {
     <View>
       {errors.map(error => {
         if (error.errorType == "EmptyFieldError") {
-          return (<EmptyFieldError field={error.field} key={0} />)
+          return (<EmptyFieldError field={error.field} key={error.field} />)
         } else if (error.errorType == "NumericError") {
           return (<NumericError field={error.field} key={1} />)
         } else if (error.errorType == "DuplicateNameError") {
