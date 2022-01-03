@@ -11,7 +11,8 @@ const YieldStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopColor: Colors.android.gray,
     borderTopWidth: 1,
-    padding: 8
+    padding: 8,
+    alignItems: 'center'
   }, 
   label: {
     width: '40%', 
