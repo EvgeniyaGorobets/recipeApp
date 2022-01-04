@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/chef-icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/chef-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,14 +23,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/transparent-chef.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.gorobots.alexeysrecipeapp",
       "versionCode": 1
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/chef-icon.png"
     }
   }
 }
