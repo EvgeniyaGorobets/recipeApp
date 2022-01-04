@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Colors } from '../style/stylesheets';
 
 export const IngredientStyles = StyleSheet.create({
@@ -8,8 +9,7 @@ export const IngredientStyles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    flexGrow: 1,
-    justifyContent: "flex-end",
+    flexGrow: 1
   },
   row: {
     borderBottomColor: Colors.android.gray,
@@ -26,14 +26,13 @@ export const IngredientStyles = StyleSheet.create({
 // contains the component to render
 const IngredientList = ({ ingredients }) => {
   return (
-    <ScrollView >
+    <KeyboardAwareScrollView >
       <View style={IngredientStyles.list}>
         {ingredients.map((ingredient, index) => {
           return (<View style={IngredientStyles.row} key={index}>{ingredient}</View>);
         })}
-        <View style={{ flexGrow: 1 }} />
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 }
 

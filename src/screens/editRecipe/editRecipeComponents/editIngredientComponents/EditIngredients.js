@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
 import { addIngredient, anyTrue } from '../../../../lib';
 import { AddButton, IngredientList } from '../../../../ui';
 import EditIngredientRow from './EditIngredientRow';
@@ -35,11 +34,7 @@ const EditIngredients = ({ ingredients, setIngredients, showErrors, setRecipeErr
   const addIngrButton = <AddButton onPress={addIngr} style={{ width: '100%' }} />;
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}>
-      <IngredientList ingredients={[...ingredientComponents, addIngrButton]} />
-    </KeyboardAvoidingView>
+    <IngredientList ingredients={[...ingredientComponents, addIngrButton]} />
   )
 }
 
