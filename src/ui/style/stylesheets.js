@@ -52,7 +52,8 @@ export const LayoutStyles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 5,
-    paddingBottom: 5
+    paddingBottom: 5,
+    flexGrow: 1
   }
 });
 
