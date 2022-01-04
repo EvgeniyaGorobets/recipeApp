@@ -23,7 +23,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/transparent-chef.png",
+        "foregroundImage": "./assets/chef-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.gorobots.alexeysrecipeapp",
