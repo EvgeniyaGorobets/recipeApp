@@ -30,7 +30,6 @@ const SaveRecipeButton = (props) => {
         navigation.navigate('ViewRecipe', { recipe: newName });
       }
     } else {
-      //<Alert></Alert>
       showErrors(true);
     }
   }

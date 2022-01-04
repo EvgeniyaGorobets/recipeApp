@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import { LayoutStyles, DeleteRecipeModal, RecipesContext, HideOnKeyboardOpen } from '../../ui';
-import {
-  EditRecipeName, EditRecipeYield, EditIngredients, SaveRecipeButton,
-  DeleteRecipeButton
-} from './editRecipeComponents';
+import { EditRecipeName, EditRecipeYield, EditIngredients, SaveRecipeButton, DeleteRecipeButton } from './editRecipeComponents';
+import { newRecipe } from '../../lib';
 
 const EditRecipe = ({ route }) => {
   const { recipes, setRecipes } = useContext(RecipesContext);
-  const recipe = recipes[route.params.recipe];
+  const recipe = route.params.recipe ? recipes[route.params.recipe] : newRecipe();
 
   const [recipeName, setName] = useState(recipe.name);
   const [recipeYield, setYield] = useState(recipe.yield);
@@ -52,8 +50,9 @@ const EditRecipe = ({ route }) => {
             ingredients={ingredients}
             showErrors={setErrorVisibility}
             errors={errors}
+            key={0}
           />,
-          <DeleteRecipeButton openModal={setModalVisible} />
+          <DeleteRecipeButton openModal={setModalVisible} key={1} />
         ]} />
       <DeleteRecipeModal
         visible={modalVisible}

@@ -1,4 +1,4 @@
-const newRecipe = () => {
+export const newRecipe = () => {
   return ({
     name: '',
     yield: {amount: '1', units: 'servings'},
@@ -6,14 +6,10 @@ const newRecipe = () => {
   })
 }
 
-export const addRecipe = ( recipes ) => {
-  return({ ...recipes, '': newRecipe()});
-}
-
 export const updateRecipe = (recipes, oldName, recipeName, recipeYield, recipeIngr) => {
   const recipe = {name: recipeName, yield: recipeYield, ingredients: recipeIngr};
   const newRecipes = { ...recipes, [recipeName]: recipe };
-  if (oldName != recipeName) {
+  if (oldName != recipeName && oldName != '') {
     delete newRecipes[oldName];
   }
   return (newRecipes);

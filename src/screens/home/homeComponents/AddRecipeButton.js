@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { BottomButton, RecipesContext, Colors } from "../../../ui";
-import { addRecipe } from "../../../lib";
+import { BottomButton, Colors } from "../../../ui";
 
 const AddRecipeButton = () => {
-  const { recipes, setRecipes } = useContext(RecipesContext);
   const navigation = useNavigation();
-
   const onPress = () => {
-    setRecipes(addRecipe(recipes));
     navigation.navigate('EditRecipe', { recipe: "" })
   }
 
