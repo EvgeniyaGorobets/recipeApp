@@ -19,7 +19,7 @@ const BottomButton = (props) => {
   const buttonColor = (color == Colors.android.red) ? ButtonStyles.redOutline : ButtonStyles.blueFill;
   const textColor = (color == Colors.android.red) ? Colors.android.red : 'white';
 
-  return (
+  return ( 
     <View style={[LayoutStyles.row, ButtonStyles.container, containerStyle]} >
       <Pressable
         onPress={onPress}

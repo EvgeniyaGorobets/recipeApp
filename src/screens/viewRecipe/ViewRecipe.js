@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { View } from "react-native";
-import { LayoutStyles, RecipesContext } from '../../ui';
+import { LayoutStyles, RecipesContext, HideOnKeyboardOpen } from '../../ui';
 import { RecipeName, RecipeYield, Ingredients, EditRecipeButton } from './viewRecipeComponents';
 
 const ViewRecipe = ({ route }) => {
@@ -21,7 +21,7 @@ const ViewRecipe = ({ route }) => {
         ingredients={recipe.ingredients} 
         baseYield={recipe.yield.amount} 
         newYield={recipeYield.amount} />
-      <EditRecipeButton recipeName={route.params.recipe} />
+      <HideOnKeyboardOpen children={<EditRecipeButton recipeName={route.params.recipe} />} />
     </View>
   )
 }

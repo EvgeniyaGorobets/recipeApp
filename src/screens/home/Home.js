@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { View } from "react-native";
-import { LayoutStyles, RecipesContext } from '../../ui';
+import { LayoutStyles, RecipesContext, HideOnKeyboardOpen } from '../../ui';
 import { SearchRecipes, RecipeList, AddRecipeButton } from './homeComponents';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
     <View style={LayoutStyles.screen}>
       <SearchRecipes setResults={setResults} recipes={recipes} />
       <RecipeList recipes={searchResults} />
-      <AddRecipeButton />
+      <HideOnKeyboardOpen children={<AddRecipeButton />} />
     </View>
   );
 }

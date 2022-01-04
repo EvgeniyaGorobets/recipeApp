@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Colors, LayoutStyles } from '../style/stylesheets';
 
@@ -17,13 +17,13 @@ export const IngredientRowStyle = {
 // contains the component to render
 const IngredientList = ({ ingredients }) => {
   return (
-    <KeyboardAwareScrollView>
+    <ScrollView>
       <View style={LayoutStyles.list}>
         {ingredients.map((ingredient, index) => {
           return (<View style={IngredientRowStyle} key={index}>{ingredient}</View>);
         })}
       </View>
-    </KeyboardAwareScrollView>
+    </ScrollView>
   )
 }
 
