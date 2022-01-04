@@ -8,7 +8,8 @@ export const IngredientStyles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    flexGrow: 1
+    flexGrow: 1,
+    justifyContent: "flex-end",
   },
   row: {
     borderBottomColor: Colors.android.gray,
@@ -25,10 +26,13 @@ export const IngredientStyles = StyleSheet.create({
 // contains the component to render
 const IngredientList = ({ ingredients }) => {
   return (
-    <ScrollView style={IngredientStyles.list}>
-      {ingredients.map((ingredient, index) => {
-        return (<View style={IngredientStyles.row} key={index}>{ingredient}</View>);
-      })}
+    <ScrollView >
+      <View style={IngredientStyles.list}>
+        {ingredients.map((ingredient, index) => {
+          return (<View style={IngredientStyles.row} key={index}>{ingredient}</View>);
+        })}
+        <View style={{ flexGrow: 1 }} />
+      </View>
     </ScrollView>
   )
 }
