@@ -18,6 +18,7 @@ const EditIngredientRow = ({ ingredients, index, setIngredients, showErrors, set
   const deleteIngr = () => {
     const newIngredients = deleteIngredient(ingredients, index);
     setIngredients(newIngredients);
+    setErrors(false); // there cannot be errors in a nonexistent ingredient
   }
 
   return (
